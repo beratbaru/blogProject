@@ -32,6 +32,8 @@ RUN pecl install redis \
 && rm -rf /tmp/pear \ 
 && docker-php-ext-enable redis
 
+RUN apt-get update && apt-get install -y libicu-dev && docker-php-ext-install intl
+
 # Node.js ve npm'i yükle 
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \ 
     apt-get install -y nodejs && \ 
