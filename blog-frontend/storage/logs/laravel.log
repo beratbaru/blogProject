@@ -558,3 +558,12 @@ Did you mean one of these?
 #4 /Users/macssd/Desktop/blog/blog-frontend/artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
 #5 {main}
 "} 
+[2025-01-06 06:51:41] local.ERROR: Command "horizon" is not defined. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"horizon\" is not defined. at /Users/macssd/Desktop/blog/blog-frontend/vendor/symfony/console/Application.php:702)
+[stacktrace]
+#0 /Users/macssd/Desktop/blog/blog-frontend/vendor/symfony/console/Application.php(258): Symfony\\Component\\Console\\Application->find('horizon')
+#1 /Users/macssd/Desktop/blog/blog-frontend/vendor/symfony/console/Application.php(167): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 /Users/macssd/Desktop/blog/blog-frontend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /Users/macssd/Desktop/blog/blog-frontend/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1203): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 /Users/macssd/Desktop/blog/blog-frontend/artisan(13): Illuminate\\Foundation\\Application->handleCommand(Object(Symfony\\Component\\Console\\Input\\ArgvInput))
+#5 {main}
+"} 

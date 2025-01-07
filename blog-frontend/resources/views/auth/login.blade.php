@@ -1,46 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Giriş Yap</title>
+@extends('layouts.frontend')
 
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-</head>
-<body>
-   
-<div class="form-container">
+<div class="flex items-center justify-center min-h-screen">
+   <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+      <form action="{{ route('login') }}" method="POST" class="space-y-4">
+         @csrf
+         <h3 class="text-xl font-semibold text-gray-700 text-center">GİRİŞ YAP</h3>
 
-   <form action="{{ route('login') }}" method="post">
-      @csrf
-      <h3>GİRİŞ YAP</h3>
-      
-      <!-- Display success message -->
-      @if (session('success'))
-         <div class="alert alert-success">
-            {{ session('success') }}
+         <!-- Display success message -->
+         @if (session('success'))
+            <div class="bg-green-100 text-green-700 p-4 rounded-md">
+               {{ session('success') }}
+            </div>
+         @endif
+
+         <!-- Display validation or login errors -->
+         @if ($errors->any())
+            <div class="bg-red-100 text-red-700 p-4 rounded-md">
+               @foreach ($errors->all() as $error)
+                  <p class="text-sm">{{ $error }}</p>
+               @endforeach
+            </div>
+         @endif
+
+         <div>
+            <input type="email" 
+                   name="email" 
+                   required 
+                   placeholder="mailinizi girin" 
+                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300">
          </div>
-      @endif
 
-      <!-- Display validation or login errors -->
-      @if ($errors->any())
-         <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-               <span class="error-msg">{{ $error }}</span>
-            @endforeach
+         <div>
+            <input type="password" 
+                   name="password" 
+                   required 
+                   placeholder="şifrenizi girin" 
+                   class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300">
          </div>
-      @endif
 
-      <input type="email" name="email" required placeholder="mailinizi girin">
-      <input type="password" name="password" required placeholder="şifrenizi girin">
-      <input type="submit" name="submit" value="giriş yap" class="form-btn">
-      <p>Hesabın yok mu? <a href="{{ route('register') }}">kayıt ol</a></p>
-   </form>
+         <div>
+            <input type="submit" 
+                   name="submit" 
+                   value="giriş yap" 
+                   class="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 cursor-pointer">
+         </div>
 
+         <p class="text-center text-gray-600">
+            Hesabın yok mu? 
+            <a href="{{ route('register') }}" class="text-blue-500 hover:underline">kayıt ol</a>
+         </p>
+      </form>
+   </div>
 </div>
-
-</body>
-</html>
