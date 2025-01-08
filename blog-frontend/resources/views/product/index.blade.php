@@ -86,7 +86,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-xl">
-                            <i class="fas fa-trash-alt"></i>
+                            <i class="fas fa-trash-alt" style="width:22px"></i>
                         </button>
                     </form>
                 </div>
