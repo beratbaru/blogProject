@@ -79,7 +79,7 @@ class UserController extends Controller
         $response = Http::withToken(session('api_token'))->post('http://api_nginx/api/logout');
     
         // Clear session data
-        session()->forget(['api_token', 'user_name']);
+        session()->forget(['api_token', 'user_name', 'user']);
     
         if ($response->successful()) {
             return redirect()->route('login')->with('success', 'Başarıyla çıkış yapıldı.');
@@ -87,5 +87,42 @@ class UserController extends Controller
     
         return redirect()->route('login')->withErrors(['logout' => 'Çıkış sırasında bir hata oluştu.']);
     }
+    
+
+
+    public function show(){
+        $response = Http::withHeaders(['Authorization' => session('api_token')])
+        ->get(env('API_URL') . '/api/profile', request()->query());
+        $profile = $response->json()['data'];
+        if ($response->successful()){
+            $user = session('user');
+            return view(
+                'profile', compact('profile', 'user')
+            );
+        }
+    }
+    public function update(Request $request) 
+    { 
+        // Add the user ID to the request payload
+        $request['id'] = session('user')['id']; 
+    
+        // Send the request to the API
+        $response = Http::acceptJson()
+            ->withHeaders(['Authorization' => session('api_token')])
+            ->put(env('API_URL').'/api/profile', $request->all()); 
+    
+        // Check if the update was successful
+        if ($response->successful()) {
+            // Update the session with the new user data
+            session(['user' => $response->json('data')]);
+    
+            // Redirect with success message
+            return redirect('/post')->with('status', 'Profiliniz başarıyla güncellendi.');
+        }
+    
+        // Handle API errors
+        return redirect('/post')->withErrors(['update' => 'Profil güncellemesi başarısız.']);
+    }
+    
     
 }

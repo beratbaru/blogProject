@@ -1,14 +1,14 @@
 <?php
-
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\ProfileController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::middleware(['auth:sanctum'])->group(function (){
+/*Route::middleware(['auth:sanctum'])->group(function (){
 
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/profile', [AuthController::class, 'profile']);
@@ -20,7 +20,25 @@ Route::put('products/{id}', [ProductController::class, 'update']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::post('/products', [ProductController::class, 'store']);
 
-});
+});*/
+
+Route::middleware(['auth:sanctum'])->group(function (){
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::apiResource('posts', PostController::class);
+    Route::get('/posts', [PostController::class, 'index']); // List posts
+    Route::get('/posts/{id}', [PostController::class, 'show']); // Show single post
+    Route::delete('posts/{id}', [PostController::class, 'destroy']);
+    Route::put('posts/{id}', [PostController::class, 'update']);
+    Route::get('/posts', [PostController::class, 'index']);
+    Route::post('/posts', [PostController::class, 'store']);
+
+    Route::get('/profile', [AuthController::class, 'profile']);
+    Route::put('/profile', [ProfileController::class, 'update']);
+    
+    });
+
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();

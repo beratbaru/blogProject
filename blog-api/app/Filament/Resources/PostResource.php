@@ -31,7 +31,10 @@ class PostResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('image')
                     ->image()
-                    ->required(),
+                    ->required()
+                    ->directory('post-images')
+                    ->fetchFileInformation(false),
+
                 Forms\Components\DatePicker::make('activationDate')
                     ->required(),
                 Forms\Components\DatePicker::make('deactivationDate')
@@ -39,6 +42,8 @@ class PostResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('status')
+                    ->required(),
             ]);
     }
 
@@ -57,6 +62,7 @@ class PostResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

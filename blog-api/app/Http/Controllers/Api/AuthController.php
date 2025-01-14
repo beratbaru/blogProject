@@ -45,7 +45,8 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Giriş başarılı.',
             'token_type' => 'Bearer',
-            'token' => 'Bearer ' . $token
+            'token' => 'Bearer ' . $token,
+            'user' => $user
         ], 200);
     }
     
@@ -109,7 +110,6 @@ class AuthController extends Controller
     // Profile Method
     public function profile(Request $request)
     {
-        
         if ($request->user()) {
             return response()->json([
                 'message' => 'Profile fetched successfully.',

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Filament\Tables\Columns\ImageColumn;
+
 class Post extends Model
 {
     use HasFactory;
@@ -26,10 +28,10 @@ class Post extends Model
     ];
 
     // Accessor for image URL
-    public function getImageUrlAttribute()
+    /*public function getImageUrlAttribute()
     {
         return $this->image ? asset('storage/' . $this->image) : null;
-    }
+    }*/
 
     // Query scope for active posts
     public function scopeActive($query)

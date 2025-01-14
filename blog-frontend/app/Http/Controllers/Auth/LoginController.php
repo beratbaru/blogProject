@@ -34,15 +34,15 @@ class LoginController extends Controller
         if ($response->successful() && isset($response['token'])) {
             // Store token in session
             session([
-                'api_token' => $response['token'],
+                'api_token' => $response['token'], 'user' => $response['user'],
+                
             ]);
     
-            return redirect()->route('product.index')->with('success', 'Giriş başarılı!');
+            return redirect()->route('post.index')->with('success', 'Giriş başarılı!');
         }
     
         // Handle login errors
         $errorMessage = $response->json('message') ?? 'Giriş başarısız.';
         return back()->withErrors(['login' => $errorMessage]);
     }
-    
 }

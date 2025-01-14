@@ -14,13 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(ShieldSeeder::class);
         // User::factory(10)->create();
-        Role::firstOrCreate(['name' => 'super-admin']);
-
         User::factory()->create([
             'name' => 'berat barulay',
             'email' => 'berat123@gmail.com',
             'password' => password_hash('berat123', PASSWORD_DEFAULT)
         ])->assignRole('super-admin');
+        User::factory()->create([
+            'name' => 'poyraz boran',
+            'email' => 'poyraz@gmail.com',
+            'password' => password_hash('berat123', PASSWORD_DEFAULT)
+        ])->assignRole('author');
     }
 }

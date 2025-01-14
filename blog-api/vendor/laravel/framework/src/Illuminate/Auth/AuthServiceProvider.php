@@ -9,7 +9,8 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
-
+use App\Models\Post;
+use App\Policies\PostPolicy;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -109,4 +110,5 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
     }
+    
 }
