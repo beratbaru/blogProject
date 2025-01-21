@@ -21,12 +21,12 @@
 <div class="mt-[80px]"></div> 
 @else
 <div class="container mx-auto p-4">
-    <div class="sticky top-0 bg-gray-100 z-10 py-3 border-b">
+    <div class="sticky top-0 bg-gray-100 z-10 py-3 border-b rounded-lg">
         <div class="flex justify-between items-center">
-            <h4 class="text-lg font-semibold">Blog</h4>
+            <h4 class="ml-5 text-lg font-semibold">Blog</h4>
             <div class="flex items-center">
                 <div class="md:hidden relative">
-                    <button class="text-gray-600 text-2xl" id="menuButton">
+                    <button class="text-gray-600 text-2xl mr-5" id="menuButton">
                         <i class="fas fa-bars"></i>
                     </button>
                     <div class="absolute top-full right-0 bg-white shadow-md mt-2 rounded-md hidden" id="menuDropdown">
@@ -47,7 +47,7 @@
                         </button>
                     </form>
                     <a href="{{ url('profile') }}" class="text-gray-600 text-xl hover:text-gray-800">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user mr-5"></i>
                     </a>
                 </div>
             </div>
@@ -65,7 +65,7 @@
         @foreach ($posts as $post)
         <div class="bg-white shadow-lg rounded-md p-4 flex flex-col justify-between relative">
             <div>
-                <h5 class="text-lg font-bold mb-2">{{ $post['image'] }}</h5>
+                <img class="text-lg font-bold mb-2" src={{"http://".env('API_URL')."/storage/".$post['image']}}></img>
                 <p class="text-gray-600 mb-4">{{ $post['title'] }}</p>
             </div>
             <div class="mt-auto">

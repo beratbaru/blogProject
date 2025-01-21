@@ -32,9 +32,7 @@ class PostResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required()
-                    ->directory('post-images')
-                    ->fetchFileInformation(false),
-
+                    ->directory(''),
                 Forms\Components\DatePicker::make('activationDate')
                     ->required(),
                 Forms\Components\DatePicker::make('deactivationDate')

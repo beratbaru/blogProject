@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
@@ -11,7 +12,10 @@ use App\Http\Middleware\CheckLogin;
 // Resource Route for posts (handles all CRUD routes)
 Route::resource('post', PostController::class);
 
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('post.show');
+Route::get('/posts/{postId}', [CommentController::class, 'show'])->name('post.show');
+Route::post('/posts/{postId}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+
 
 // Alias for post Index
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
