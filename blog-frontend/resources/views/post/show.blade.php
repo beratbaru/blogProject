@@ -2,6 +2,7 @@
 @extends('layouts.frontend')
 
 @section('content')
+
 <div class="container mx-auto mt-8">
     <!-- Post Section -->
     <div class="bg-white shadow-md rounded-lg">
@@ -11,7 +12,7 @@
         </div>
         <div class="p-6">
             <p class="text-gray-800">{{ $post['content'] ?? 'Post description' }}</p>
-            <img class="text-gray-600 mt-2" src={{"http://".env('API_URL')."/storage/".$post['image']}}></img>
+            <img class="text-gray-600 mt-2" src="{{ 'http://' . env('API_URL') . '/storage/' . $post['image'] }}" alt="Post Image">
         </div>
     </div>
 

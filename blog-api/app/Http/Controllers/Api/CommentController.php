@@ -11,9 +11,10 @@ class CommentController extends Controller
 {
     public function index(Post $post)
     {
-        $comments = $post->comments()->with('user')->get();
+        $comments = $post->comments()->where('status', '1')->with('user')->get();
 
         return response()->json($comments);
+        
     }
 
     public function store(Request $request, Post $post)
@@ -28,7 +29,7 @@ class CommentController extends Controller
             'content' => $request->content,
             'status' => '0', // Default status (pending)
         ]);
-
+        
         return response()->json($comment, 201);
     }
 }

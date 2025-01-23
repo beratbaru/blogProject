@@ -41,6 +41,9 @@ Route::middleware(['auth:sanctum'])->group(function (){
     
     Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
     Route::get('/posts/{post}/comments', [CommentController::class, 'index']);
+
+    Route::patch('/comments/{comment}/status', [CommentController::class, 'updateStatus'])
+        ->middleware('can:update,comment'); // Ensure proper authorization
     });
 
 

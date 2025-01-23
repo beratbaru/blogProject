@@ -2,6 +2,7 @@
 
 namespace Illuminate\Auth;
 
+use App\Models\Comment;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
@@ -10,6 +11,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Post;
+use App\Policies\CommentPolicy;
 use App\Policies\PostPolicy;
 class AuthServiceProvider extends ServiceProvider
 {
@@ -110,5 +112,7 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
     }
-    
+    protected $policies = [
+        Comment::class => CommentPolicy::class,
+    ];
 }

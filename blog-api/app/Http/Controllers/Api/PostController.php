@@ -106,7 +106,7 @@ class PostController extends Controller
 public function destroy($id)
 {
     $post = post::find($id);
-
+    
     if (!$post) {
         return response()->json(['message' => 'Ürün bulunamadı.'], 404);
     }

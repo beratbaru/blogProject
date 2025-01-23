@@ -24,28 +24,29 @@ class CommentController extends Controller
             ->withInput();
     }
     // CommentController.php
-public function show($postId)
-{
+    public function show($postId)
+    {
+        // Fetch the post data
+        $responsePost = Http::withHeaders(['Authorization' => session('api_token')])
+            ->get(env('API_URL') . "/api/posts/{$postId}");
     
-    // Fetch the post data
-    $responsePost = Http::withHeaders(['Authorization' => session('api_token')])
-        ->get(env('API_URL') . "/api/posts/{$postId}");
-
-    // Fetch comments for the post
-    $responseComments = Http::withHeaders(['Authorization' => session('api_token')])
-        ->get(env('API_URL') . "/api/posts/{$postId}/comments");
-
-    // Check if both the post and comments request were successful
-    if ($responsePost->failed() || $responseComments->failed()) {
-        return redirect()->route('post.index')->with('error', 'Post or comments could not be fetched.');
+        // Fetch comments for the post
+        $responseComments = Http::withHeaders(['Authorization' => session('api_token')])
+            ->get(env('API_URL') . "/api/posts/{$postId}/comments");
+    
+        // Debugging: Check the API responses
+    
+        // Check if both the post and comments request were successful
+        if ($responsePost->failed() || $responseComments->failed()) {
+            return redirect()->route('post.index')->with('error', 'Post or comments could not be fetched.');
+        }
+    
+        $post = $responsePost->json()['data'] ?? null;
+        $comments = $responseComments->successful() ? $responseComments->json() : [];
+    
+        // Pass both post and comments to the view
+        return view('post.show', compact('post', 'comments', 'postId'));
     }
-
-    $post = $responsePost->json()['data'] ?? null;
-    $comments = $responseComments->successful() ? $responseComments->json() : [];
-
-    // Pass both post and comments to the view
-    return view('post.show', compact('post', 'comments', 'postId'));
-}
-
+    
     
 }

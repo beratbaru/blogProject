@@ -80,13 +80,13 @@
                         <i class="fas fa-eye"></i>
                     </a>
                     <!-- Delete Button (Icon) -->
-                    <form action="{{ route('post.destroy', $post['id']) }}" method="POST" onsubmit="return confirm('Silmek istediğinize emin misiniz?');">
+                    {{-- <form action="{{ route('post.destroy', $post['id']) }}" method="POST" onsubmit="return confirm('Silmek istediğinize emin misiniz?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-xl">
                             <i class="fas fa-trash-alt" style="width:22px"></i>
                         </button>
-                    </form>
+                    </form> --}}
                 </div>
             </div>
         </div>
