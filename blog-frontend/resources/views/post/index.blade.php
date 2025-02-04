@@ -2,117 +2,141 @@
 
 @section('content')
 @if(!session('api_token'))
-<div class="flex items-center justify-center bg-gray-100 text-gray-800 fixed top-0 left-0 right-0 z-50 py-4">
-    <div class="text-center w-full">
-        <h3 class="text-lg font-bold">Verileri görmek için giriş yapınız.</h3>
-        <div class="mt-4 flex justify-center gap-4">
-            <a href="{{ route('register') }}" class="px-6 py-2 text-blue-600 font-medium rounded-md hover:bg-blue-100 transition duration-300">
-                <span class="inline md:hidden">+</span>
-                <span class="hidden md:inline">Kayıt Ol</span>
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center px-4">
+    <div class="max-w-md w-full text-center bg-white rounded-2xl p-8 shadow-xl">
+        <div class="mb-6">
+            <h1 class="text-4xl font-bold text-blue-600 mb-2">Blog</h1>
+            <p class="text-gray-600">Sitemize erişebilmek için giriş yapmanız gerekmektedir.</p>
+        </div>
+        <div class="space-y-4">
+            <a href="{{ route('register') }}" class="block w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg font-semibold shadow-md hover:shadow-lg transition duration-300">
+                Kayıt Ol
             </a>
-            <a href="{{ route('login') }}" class="px-6 py-2 text-gray-600 font-medium rounded-md hover:bg-gray-100 transition duration-300">
-                <span class="inline md:hidden">→</span>
-                <span class="hidden md:inline">Giriş Yap</span>
+            <a href="{{ route('login') }}" class="block w-full border-2 border-blue-500 text-blue-600 py-3 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">
+                Giriş Yap
             </a>
         </div>
     </div>
 </div>
-<!-- Add margin to the top of the content to avoid overlap -->
-<div class="mt-[80px]"></div> 
 @else
-<div class="container mx-auto p-4">
-    <div class="sticky top-0 bg-gray-100 z-10 py-3 border-b rounded-lg">
-        <div class="flex justify-between items-center">
-            <h4 class="ml-5 text-lg font-semibold">Blog</h4>
-            <div class="flex items-center">
-                <div class="md:hidden relative">
-                    <button class="text-gray-600 text-2xl mr-5" id="menuButton">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="absolute top-full right-0 bg-white shadow-md mt-2 rounded-md hidden" id="menuDropdown">
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="block px-6 py-2 text-left w-full hover:bg-gray-200 rounded-md">
-                                <i class="fas fa-sign-out-alt"></i> Çıkış Yap
-                            </button>
-                        </form>
-
-                    </div>
-                </div>
-                <div class="hidden md:flex gap-2">
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <!-- Header -->
+    <header class="sticky top-0 bg-white/80 backdrop-blur-md border-b z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="text-2xl font-bold text-blue-600">Blog</a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="{{ url('profile') }}" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-user-circle text-xl mr-2"></i>
+                        Profil
+                    </a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="text-gray-600 text-xl hover:text-gray-800">
-                            <i class="fas fa-sign-out-alt"></i>
+                        <button type="submit" class="flex items-center text-gray-600 hover:text-red-600 transition-colors">
+                            <i class="fas fa-sign-out-alt text-xl mr-2"></i>
+                            Çıkış Yap
                         </button>
                     </form>
-                    <a href="{{ url('profile') }}" class="text-gray-600 text-xl hover:text-gray-800">
-                        <i class="fas fa-user mr-5"></i>
-                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menuButton" class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="menuDropdown" class="md:hidden absolute right-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-2 hidden">
+        <a href="{{ url('profile') }}" class="block px-6 py-3 hover:bg-gray-100">
+            <i class="fas fa-user-circle mr-3"></i>Profil
+        </a>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="block w-full text-left px-6 py-3 hover:bg-gray-100 text-red-600">
+                <i class="fas fa-sign-out-alt mr-3"></i>Çıkış yap
+            </button>
+        </form>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        @if(session('status'))
+        <div class="mb-8 p-4 bg-green-100 text-green-700 rounded-lg">{{ session('status') }}</div>
+        @endif
+
+        <!-- Posts Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @forelse ($posts as $post)
+            <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <!-- Featured Image -->
+                <div class="relative h-48 overflow-hidden">
+                    <a href="{{ route('post.show', $post['id']) }}"><img src="{{ 'http://'.env('API_URL').'/storage/'.$post['image'] }}" 
+                         alt="Post image" 
+                         class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                         ></a>
+                    <div class="absolute top-4 right-4 flex space-x-2">
+                        <a href="{{ route('post.show', $post['id']) }}" 
+                           class="bg-white/90 text-gray-600 p-2 rounded-full shadow-sm hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-eye text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $post['title'] }}</h3>
+                    <p class="text-gray-600 line-clamp-3 mb-4">{{ $post['content'] }}</p>
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                    <span class="flex items-center">
+                        <i class="fas fa-clock mr-2"></i>
+                        {{-- Add post date here if available --}}
+                    </span>
+                    <span class="flex items-center">
+                        <i class="fas fa-comment mr-2"></i>
+                        {{ $post['comments_count'] ?? 0 }} yorum {{-- Display actual comment count --}}
+                    </span>
+                </div>
+                </div>
+            </article>
+            @empty
+            <div class="col-span-full text-center py-12">
+                <div class="text-gray-500 text-xl mb-4">
+                    <i class="fas fa-file-alt text-4xl mb-4"></i>
+                    <p>Yazı bulunamadı. Hemen bir tane oluştur!</p>
                 </div>
             </div>
+            @endforelse
         </div>
-    </div>
 
-    @if(session('status'))
-    <div class="mt-4 p-4 bg-green-500 text-white rounded-md">{{ session('status') }}</div>
-    @endif
+        <!-- Pagination -->
+        @if(isset($paginationLinks) && isset($totalposts) && $totalposts > 6)
+        <div class="mt-12 flex justify-center space-x-4">
+            @if ($paginationLinks['previous'])
+            <a href="{{ url()->current() . '?' . parse_url($paginationLinks['previous'], PHP_URL_QUERY) }}" 
+               class="px-5 py-2 bg-white border rounded-lg hover:bg-blue-50 text-blue-600 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+            </a>
+            @endif
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-12">
-        @if(empty($posts) || count($posts) === 0)
-        <div class="col-span-full text-center py-4">Yazı bulunamadı.</div>
-        @else
-        @foreach ($posts as $post)
-        <div class="bg-white shadow-lg rounded-md p-4 flex flex-col justify-between relative">
-            <div>
-                <img class="text-lg font-bold mb-2" src={{"http://".env('API_URL')."/storage/".$post['image']}}></img>
-                <p class="text-gray-600 mb-4">{{ $post['title'] }}</p>
+            @if(isset($currentPage) && isset($totalPages))
+            <div class="px-5 py-2 bg-blue-600 text-white rounded-lg">
+                {{ $currentPage }} / {{ $totalPages }}
             </div>
-            <div class="mt-auto">
-                <p class="text-gray-800 font-semibold mb-4">{{ $post['content'] }}</p>
-                <div class="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-4">
-                    <!-- Edit Button (Icon) -->
-                    <a href="{{ route('post.edit', $post['id']) }}" class="text-xl">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <!-- Show Button (Icon) -->
-                    <a href="{{ route('post.show', $post['id']) }}" class="text-xl">
-                        <i class="fas fa-eye"></i>
-                    </a>
-                    <!-- Delete Button (Icon) -->
-                    {{-- <form action="{{ route('post.destroy', $post['id']) }}" method="POST" onsubmit="return confirm('Silmek istediğinize emin misiniz?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-xl">
-                            <i class="fas fa-trash-alt" style="width:22px"></i>
-                        </button>
-                    </form> --}}
-                </div>
-            </div>
+            @endif
+
+            @if ($paginationLinks['next'])
+            <a href="{{ url()->current() . '?' . parse_url($paginationLinks['next'], PHP_URL_QUERY) }}" 
+               class="px-5 py-2 bg-white border rounded-lg hover:bg-blue-50 text-blue-600 flex items-center">
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            @endif
         </div>
-        @endforeach
         @endif
-    </div>
-
-    @if (!empty($paginationLinks) && isset($totalposts) && $totalposts > 10)
-    <div class="flex justify-center mt-4 items-center">
-        @if ($paginationLinks['previous'])
-        <a href="{{ url()->current() . '?' . parse_url($paginationLinks['previous'], PHP_URL_QUERY) }}" class="px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition duration-300">Geri</a>
-        @else
-        <button class="px-6 py-2 bg-gray-300 text-gray-500 rounded-md" disabled>Geri</button>
-        @endif
-
-        @if (isset($currentPage) && isset($totalPages))
-        <span class="mx-3">Sayfa {{ $currentPage }} / {{ $totalPages }}</span>
-        @endif
-
-        @if ($paginationLinks['next'])
-        <a href="{{ url()->current() . '?' . parse_url($paginationLinks['next'], PHP_URL_QUERY) }}" class="px-6 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition duration-300">İleri</a>
-        @else
-        <button class="px-6 py-2 bg-gray-300 text-gray-500 rounded-md" disabled>İleri</button>
-        @endif
-    </div>
-    @endif
+    </main>
 </div>
 @endif
 
@@ -121,5 +145,19 @@ document.getElementById('menuButton').addEventListener('click', function() {
     const dropdown = document.getElementById('menuDropdown');
     dropdown.classList.toggle('hidden');
 });
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const menuButton = document.getElementById('menuButton');
+    const dropdown = document.getElementById('menuDropdown');
+    
+    if (!menuButton.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.add('hidden');
+    }
+});
 </script>
+
+<style>
+
+</style>
 @endsection

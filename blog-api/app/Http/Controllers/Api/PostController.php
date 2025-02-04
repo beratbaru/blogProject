@@ -12,8 +12,12 @@ class PostController extends Controller
     // Fetch all posts
     public function index()
     {
-        $posts = post::latest()->paginate(10);  // Paginate the posts
-        
+        $posts = Post::withCount('comments')  // Count the number of comments
+                    ->orderByDesc('comments_count') // Sort by comment count (highest first)
+                    ->latest()  // Then sort by latest posts
+                    ->where('status', 'active')
+                    ->paginate(6);  // Paginate the results
+    
         return response()->json([
             'message' => 'posts fetched successfully',
             'data' => $posts->items(),  // Get the items for the current page
@@ -29,7 +33,13 @@ class PostController extends Controller
         ], 200);
     }
     
-    
+
+    // public function popular(){
+    //     $post = Post::withCount('comments')
+    //     ->orderBy('comments_count', 'desc')
+    //     ->get();
+    //     return response()->json($post);
+    // }
     
     
 

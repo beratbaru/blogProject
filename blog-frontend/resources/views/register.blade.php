@@ -1,13 +1,14 @@
 @extends('layouts.frontend')
 
-<div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-        <form action="{{ route('register') }}" method="POST" class="space-y-4">
+@section('content')
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-purple-50">
+    <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md transform transition-all hover:scale-105">
+        <form action="{{ route('register') }}" method="POST" class="space-y-6">
             @csrf
-            <h3 class="text-xl font-semibold text-gray-700 text-center">Kayıt ol</h3>
+            <h3 class="text-2xl font-bold text-gray-800 text-center mb-6">Kayıt Ol</h3>
 
             @if ($errors->any())
-                <div class="bg-red-100 text-red-700 p-4 rounded-md">
+                <div class="bg-red-50 text-red-600 p-4 rounded-lg text-sm">
                     @foreach ($errors->all() as $error)
                         <p>{{ $error }}</p>
                     @endforeach
@@ -15,50 +16,59 @@
             @endif
 
             <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">İsim</label>
                 <input type="text" 
                        name="name" 
+                       id="name" 
                        required 
                        placeholder="İsminizi girin" 
                        value="{{ old('name') }}" 
-                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300">
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
             </div>
 
             <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">E-posta</label>
                 <input type="email" 
                        name="email" 
+                       id="email" 
                        required 
-                       placeholder="Mailinizi girin" 
+                       placeholder="E-postanızı girin" 
                        value="{{ old('email') }}" 
-                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300">
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
             </div>
 
             <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Şifre</label>
                 <input type="password" 
                        name="password" 
+                       id="password" 
                        required 
                        placeholder="Şifrenizi girin" 
-                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300">
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
             </div>
 
             <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">Şifre Doğrulama</label>
                 <input type="password" 
                        name="password_confirmation" 
+                       id="password_confirmation" 
                        required 
-                       placeholder="Şifrenizi doğrulayın" 
-                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300">
+                       placeholder="Şifrenizi tekrar girin" 
+                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
             </div>
 
             <div>
-                <input type="submit" 
-                       name="submit" 
-                       value="kayıt ol" 
-                       class="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 cursor-pointer">
+                <button type="submit" 
+                        class="w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all">
+                    Kayıt Ol
+                </button>
             </div>
 
-            <p class="text-center text-gray-600">
-                Zaten hesabın var mı? 
-                <a href="{{ route('login') }}" class="text-blue-500 hover:underline">giriş yap</a>
+            <p class="text-center text-gray-600 text-sm">
+                Zaten hesabınız var mı? 
+                <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Giriş Yap</a>
             </p>
         </form>
     </div>
 </div>
+@endsection

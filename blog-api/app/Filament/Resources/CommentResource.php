@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\ToggleButtons;
 
 class CommentResource extends Resource
 {
@@ -31,6 +32,11 @@ class CommentResource extends Resource
                     ->numeric(),
                 Forms\Components\TextInput::make('status')
                     ->required(),
+                    ToggleButtons::make('status')
+                    ->options([
+                        '1' => 'active',
+                        '0' => 'passive',
+                    ]),
             ]);
     }
 

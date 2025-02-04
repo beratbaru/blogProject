@@ -15,8 +15,7 @@ class CommentController extends Controller
             ->post(env('API_URL') . "/api/posts/{$postId}/comments", $request->all());
     
         if ($response->successful()) {
-            return redirect()->route('post.show', ['postId' => $postId])
-                ->with('success', 'Comment created successfully.');
+            return redirect()->back()->with('success', 'Yorumunuz incelemeye gönderildi!');
         }
     
         return back()
@@ -37,13 +36,11 @@ class CommentController extends Controller
         // Debugging: Check the API responses
     
         // Check if both the post and comments request were successful
-        if ($responsePost->failed() || $responseComments->failed()) {
-            return redirect()->route('post.index')->with('error', 'Post or comments could not be fetched.');
-        }
+
     
         $post = $responsePost->json()['data'] ?? null;
         $comments = $responseComments->successful() ? $responseComments->json() : [];
-    
+        
         // Pass both post and comments to the view
         return view('post.show', compact('post', 'comments', 'postId'));
     }

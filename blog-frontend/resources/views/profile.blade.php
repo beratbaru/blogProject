@@ -2,66 +2,94 @@
 
 @section('content')
 @if(!session('api_token'))
-<div class="flex justify-center items-center min-h-screen bg-gray-900 text-red-500">
-    <div class="text-center">
-        <h3 class="text-2xl">Verileri görmek için giriş yapınız.</h3>
-        <div class="mt-4">
-            <a href="{{ route('register') }}" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Kayıt Ol</a>
-            <a href="{{ route('login') }}" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Giriş Yap</a>
+<div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
+    <div class="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+        <h3 class="text-2xl font-bold text-white mb-6">Verileri görmek için giriş yapınız.</h3>
+        <div class="flex justify-center gap-4">
+            <a href="{{ route('register') }}" 
+               class="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105">
+                Kayıt Ol
+            </a>
+            <a href="{{ route('login') }}" 
+               class="px-6 py-2 border-2 border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition-colors">
+                Giriş Yap
+            </a>
         </div>
     </div>
 </div>
 @else
+<section class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Profile Card -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-2xl font-bold text-white">Profil Bilgileri</h1>
+                    <a href="{{ route('post.index') }}" 
+                       class="flex items-center text-white hover:text-blue-100 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i> Geri Dön
+                    </a>
+                </div>
+                <p class="mt-1 text-sm text-blue-100">Profilinizi güncelleyin</p>
+            </div>
 
-<section class="py-10 min-h-screen flex items-center justify-center dark:bg-gray-900">
-    <div class="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4 relative">
-        <!-- Left Arrow Button -->
-        <a href="{{ route('post.index') }}" class="absolute sm:relative left-0 top-0 mt-4 ml-4 text-3xl text-white hover:text-gray-400 sm:ml-0 sm:mt-0">
-            <i class="fas fa-arrow-left"></i>
-        </a>
-
-        <div class="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
-            <div>
-                <h1 class="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mb-2 dark:text-white">
-                    Profil
-                </h1>
-                <h2 class="text-grey text-sm mb-4 dark:text-gray-400">Profil Düzenleme</h2>
-                <form action="{{ route('profile.update', $profile['id'])}}" method="POST">
+            <!-- Form -->
+            <div class="px-6 py-8">
+                <form action="{{ route('profile.update', $profile['id']) }}" method="POST" class="space-y-6">
                     @csrf
                     @method('PUT')
 
-                    <div class="w-full mb-4">
-                        <label for="name" class="mb-2 dark:text-gray-300">İsim Soyisim</label>
-                        <input type="text" name="name" id="name"
-                               class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                               placeholder="İsminizi giriniz." value="{{ old('name', $profile['name']) }}">
+                    <!-- Name Field -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">İsim Soyisim</label>
+                        <input type="text" name="name" id="name" 
+                               class="form-input block w-full rounded-lg border-gray-300 
+                                      focus:border-blue-500 focus:ring-2 focus:ring-blue-200
+                                      transition duration-200 @error('name') border-red-500 @enderror"
+                               placeholder="İsminizi giriniz" 
+                               value="{{ old('name', $profile['name']) }}">
                         @error('name')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="w-full mb-4">
-                        <label for="email" class="mb-2 dark:text-gray-300">Mail</label>
-                        <input type="email" name="email" id="email"
-                               class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                               placeholder="Mailinizi giriniz." value="{{ old('email', $profile['email']) }}">
+                    <!-- Email Field -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">E-posta</label>
+                        <input type="email" name="email" id="email" 
+                               class="form-input block w-full rounded-lg border-gray-300 
+                                      focus:border-blue-500 focus:ring-2 focus:ring-blue-200
+                                      transition duration-200 @error('email') border-red-500 @enderror"
+                               placeholder="E-posta adresinizi giriniz" 
+                               value="{{ old('email', $profile['email']) }}">
                         @error('email')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="w-full mb-4">
-                        <label for="password" class="mb-2 dark:text-gray-300">Yeni Şifre</label>
-                        <input type="password" name="password" id="password"
-                               class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                               placeholder="Yeni şifrenizi giriniz.">
+                    <!-- Password Field -->
+                    <div class="relative">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Yeni Şifre</label>
+                        <input type="password" name="password" id="password" 
+                               class="form-input block w-full rounded-lg border-gray-300 
+                                      focus:border-blue-500 focus:ring-2 focus:ring-blue-200
+                                      transition duration-200 @error('password') border-red-500 @enderror"
+                               placeholder="Yeni şifrenizi giriniz">
                         @error('password')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    <div class="w-full rounded-lg bg-blue-500 mt-4 text-white text-lg font-semibold">
-                        <button type="submit" class="w-full p-4">Onayla</button>
+                    <!-- Submit Button -->
+                    <div class="pt-6">
+                        <button type="submit" 
+                                class="w-full bg-gradient-to-r from-blue-600 to-purple-600 
+                                       text-white py-3 px-6 rounded-lg font-semibold
+                                       hover:from-blue-700 hover:to-purple-700 transition-all
+                                       transform hover:scale-[1.01] shadow-md">
+                            Bilgileri Güncelle
+                        </button>
                     </div>
                 </form>
             </div>

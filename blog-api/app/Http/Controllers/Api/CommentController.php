@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use App\Mail\CommentPosted;
 class CommentController extends Controller
 {
     public function index(Post $post)
     {
-        $comments = $post->comments()->where('status', '1')->with('user')->get();
+        $comments = $post->comments()->where('status','1')->with('user')->get();
 
         return response()->json($comments);
         
@@ -29,6 +29,9 @@ class CommentController extends Controller
             'content' => $request->content,
             'status' => '0', // Default status (pending)
         ]);
+        \Illuminate\Support\Facades\Mail::to('berat123@gmail.com')->send(
+            new CommentPosted($comment)
+            );
         
         return response()->json($comment, 201);
     }
