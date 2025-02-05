@@ -6,7 +6,7 @@ projeyi kendi bilgisayarına kopyala:
     2- admin paneline erişmek için: localhost:8000/panel urlsine giriş yap
     3- arayüze erişmek için localhost:8003/post urlsine giriş yap
 schedule işlemlerini test etmek için:
-    1- terminale 'php artisan tinker' yazarak tinker'a giriş yap.
+    1- terminale(blog-api'nin içinde) 'php artisan tinker' yazarak tinker'a giriş yap.
     2- terminale '\Artisan::call('posts:update-status');' komutunu yapıştır.
     3- tarihi gelmiş yazılar sitede paylaşılmış mı diye kontrol et.
 

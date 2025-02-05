@@ -14,12 +14,16 @@ To Do List:
 
 ///
 
--- ADDED COMMENTS, MAKE STATUS OF THE COMMENTS WORK + -->
+-- ADDED COMMENTS, MAKE STATUS OF THE COMMENTS WORK + 
 
--- working on (comments->mail & queue) and (post->scheduling).
+-- working on (comments->mail & queue) and (post->scheduling). +
 
--- will create categories and tags for the posts.
+-- make it so the posts will list based on popularity. + 
 
--- make it so the posts will list based on popularity.
+-- still have to queue the mails. + -->
+
+-- will create categories and tags for the posts. 
+
+-- create filters.
 
 -- create kvkk and security policies lastly to call an end to the project.

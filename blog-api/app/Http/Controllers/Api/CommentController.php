@@ -29,7 +29,7 @@ class CommentController extends Controller
             'content' => $request->content,
             'status' => '0', // Default status (pending)
         ]);
-        \Illuminate\Support\Facades\Mail::to('berat123@gmail.com')->send(
+        \Illuminate\Support\Facades\Mail::to('berat123@gmail.com')->queue(
             new CommentPosted($comment)
             );
         

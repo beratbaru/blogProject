@@ -30,9 +30,8 @@ class CommentResource extends Resource
                 Forms\Components\TextInput::make('post_id')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
-                    ToggleButtons::make('status')
+                Forms\Components\ToggleButtons::make('status')
+                    ->required()
                     ->options([
                         '1' => 'active',
                         '0' => 'passive',

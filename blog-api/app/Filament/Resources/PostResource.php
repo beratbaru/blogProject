@@ -40,8 +40,12 @@ class PostResource extends Resource
                 Forms\Components\TextInput::make('slug')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
+                Forms\Components\ToggleButtons::make('status')
+                    ->required()
+                    ->options([
+                        '1' => 'active',
+                        '0' => 'passive',
+                    ]),
             ]);
     }
 

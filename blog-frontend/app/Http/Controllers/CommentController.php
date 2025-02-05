@@ -32,10 +32,6 @@ class CommentController extends Controller
         // Fetch comments for the post
         $responseComments = Http::withHeaders(['Authorization' => session('api_token')])
             ->get(env('API_URL') . "/api/posts/{$postId}/comments");
-    
-        // Debugging: Check the API responses
-    
-        // Check if both the post and comments request were successful
 
     
         $post = $responsePost->json()['data'] ?? null;

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProfileController;
 
 Route::get('/test', function(){
-
     return view('mail.comment-posted');
 });
 

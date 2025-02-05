@@ -97,7 +97,9 @@
                     </span>
                     <span class="flex items-center">
                         <i class="fas fa-comment mr-2"></i>
+                        @if($post['comments_count']>=1)
                         {{ $post['comments_count'] ?? 0 }} yorum {{-- Display actual comment count --}}
+                        @endif
                     </span>
                 </div>
                 </div>
