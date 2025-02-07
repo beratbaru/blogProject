@@ -20,10 +20,10 @@ To Do List:
 
 -- make it so the posts will list based on popularity. + 
 
--- still have to queue the mails. + -->
+-- still have to queue the mails. + 
 
--- will create categories for the posts. 
+-- will create categories for the posts. + 
 
 -- create filters.
 
--- create kvkk and security policies lastly to call an end to the project.
+-- create kvkk and security policies lastly to call an end to the project. -->
