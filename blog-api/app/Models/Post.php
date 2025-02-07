@@ -41,7 +41,10 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
-
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
     // Automatic slug generation
     protected static function boot()
     {

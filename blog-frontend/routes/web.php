@@ -8,14 +8,15 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckLogin;
-
+use App\Http\Controllers\PolicyController;
 // Resource Route for posts (handles all CRUD routes)
 Route::resource('post', PostController::class);
 
 Route::get('/posts/{postId}', [CommentController::class, 'show'])->name('post.show');
 Route::post('/posts/{postId}/comments', [CommentController::class, 'store'])->name('comments.store');
 
-
+Route::get('/policy/kvkk', [PolicyController::class, 'showKvkkPolicy'])->name('policy.kvkk');
+Route::get('/policy/policy', [PolicyController::class, 'showSecurityPolicy'])->name('policy.policy');
 
 // Alias for post Index
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');

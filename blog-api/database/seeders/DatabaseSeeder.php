@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'poyraz@gmail.com',
             'password' => password_hash('berat123', PASSWORD_DEFAULT)
         ])->assignRole('author');
-        
+        $this->call([
+            PolicySeeder::class,
+        ]);
     }
 }

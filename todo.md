@@ -24,8 +24,6 @@ To Do List:
 
 -- will create categories for the posts. 
 
-
-
 -- create filters.
 
 -- create kvkk and security policies lastly to call an end to the project.

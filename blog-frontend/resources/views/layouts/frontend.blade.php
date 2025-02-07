@@ -8,23 +8,34 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Ürünler</title>
-@vite('resources/css/app.css')
+    @vite('resources/css/app.css')
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-
-    <!-- Styles -->
-    
-    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    -->
 </head>
-<body style="overflow-x:hidden;">
-    <div>
+<body class="flex flex-col min-h-screen" style="overflow-x:hidden;">
+    <div class="flex-grow">
         @yield('content')
     </div>
-    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
--->
+
+    <footer class="bg-gray-800 text-white py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex justify-center space-x-8">
+                <a href="{{ route('policy.kvkk') }}" 
+                   class="text-gray-400 hover:text-white transition-colors">
+                    KVKK Politikası
+                </a>
+                <a href="{{ route('policy.policy') }}" 
+                   class="text-gray-400 hover:text-white transition-colors">
+                    Güvenlik Politikası
+                </a>
+            </div>
+            <div class="mt-4 text-sm text-gray-400">
+                &copy; {{ date('Y') }} Tüm hakları saklıdır.
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
