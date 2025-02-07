@@ -21,7 +21,7 @@ class CommentPolicy
      */
     public function view(User $user, Comment $comment): bool
     {
-        return true;
+        return $user->hasRole('super-admin');
     }
 
     /**
@@ -46,7 +46,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment): bool
     {
-        return false;
+        return $user->hasRole('super-admin');
     }
 
     /**
@@ -62,6 +62,6 @@ class CommentPolicy
      */
     public function forceDelete(User $user, Comment $comment): bool
     {
-        return false;
+        return $user->hasRole('super-admin');
     }
 }

@@ -11,6 +11,8 @@ Route::get('/test', function(){
     return view('mail.comment-posted');
 });
 
+Route::get('/categories', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
+
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 

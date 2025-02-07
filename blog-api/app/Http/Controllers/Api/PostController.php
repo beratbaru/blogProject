@@ -10,17 +10,23 @@ use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
     // Fetch all posts
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::withCount('comments')  // Count the number of comments
-                    ->orderByDesc('comments_count') // Sort by comment count (highest first)
-                    ->latest()  // Then sort by latest posts
-                    ->where('status', 'active')
-                    ->paginate(6);  // Paginate the results
-    
+        $query = Post::withCount('comments')
+                     ->orderByDesc('comments_count')
+                     ->latest()
+                     ->where('status', 'active');
+
+        // If a category filter is provided, apply it
+        if ($request->has('category_id') && !empty($request->input('category_id'))) {
+            $query->where('category_id', $request->input('category_id'));
+        }
+
+        $posts = $query->paginate(6);
+
         return response()->json([
             'message' => 'posts fetched successfully',
-            'data' => $posts->items(),  // Get the items for the current page
+            'data' => $posts->items(),
             'links' => [
                 'previous' => $posts->previousPageUrl(),
                 'next' => $posts->nextPageUrl(),
@@ -28,7 +34,7 @@ class PostController extends Controller
             'meta' => [
                 'current_page' => $posts->currentPage(),
                 'total_pages' => $posts->lastPage(),
-                'total_posts' => $posts->total(), // Total number of posts
+                'total_posts' => $posts->total(),
             ],
         ], 200);
     }

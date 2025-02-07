@@ -22,7 +22,9 @@ To Do List:
 
 -- still have to queue the mails. + -->
 
--- will create categories and tags for the posts. 
+-- will create categories for the posts. 
+
+
 
 -- create filters.
 

@@ -1,6 +1,45 @@
 @extends('layouts.frontend')
 
 @section('content')
+<!-- Header -->
+<header class="sticky top-0 bg-white/80 backdrop-blur-md border-b z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <a href="/posts" class="text-2xl font-bold text-blue-600">Blog</a>
+            
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="{{ url('profile') }}" class="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-user-circle text-xl mr-2"></i>
+                    Profil
+                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="flex items-center text-gray-600 hover:text-red-600 transition-colors">
+                        <i class="fas fa-sign-out-alt text-xl mr-2"></i>
+                        Çıkış Yap
+                    </button>
+                </form>
+            </div>
+
+            <button id="menuButton" class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- Dropdown Menu -->
+<div id="menuDropdown" class="md:hidden absolute right-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-2 hidden">
+    <a href="{{ url('profile') }}" class="block px-6 py-3 hover:bg-gray-100">
+        <i class="fas fa-user-circle mr-3"></i>Profil
+    </a>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="block w-full text-left px-6 py-3 hover:bg-gray-100 text-red-600">
+            <i class="fas fa-sign-out-alt mr-3"></i>Çıkış yap
+        </button>
+    </form>
+</div>
 <div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl mx-auto space-y-8">
         <!-- Success Message -->
@@ -12,6 +51,7 @@
         @endif
 
         <!-- Post Section -->
+        
         <article class="bg-white rounded-2xl shadow-xl overflow-hidden">
             <!-- Post Header -->
             <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4">
@@ -100,5 +140,21 @@
         </section>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuButton = document.getElementById('menuButton');
+        const menuDropdown = document.getElementById('menuDropdown');
 
+        menuButton.addEventListener('click', function () {
+            menuDropdown.classList.toggle('hidden');
+        });
+
+        // Close the dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            if (!menuButton.contains(event.target) && !menuDropdown.contains(event.target)) {
+                menuDropdown.classList.add('hidden');
+            }
+        });
+    });
+</script>
 @endsection

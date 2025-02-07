@@ -9,24 +9,25 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class PostController extends Controller
 {
     // Fetch all posts
-    public function index()
+    public function index(Request $request)
     {
-        // Fetch posts with headers and query parameters for pagination
-        $response = Http::withHeaders(['Authorization' => session('api_token')])
-            ->get(env('API_URL') . '/api/posts', request()->query());
-    
-        // Decode the API response
-        $posts = $response->json()['data'] ?? [];
-        $paginationLinks = $response->json()['links'] ?? [];
-        $meta = $response->json()['meta'] ?? [];
-    
-        // Extract metadata
+        // Fetch posts from the API. request()->query() will include category_id if set.
+        $postResponse = Http::withHeaders(['Authorization' => session('api_token')])
+            ->get(env('API_URL') . '/api/posts', $request->query());
+
+        $posts = $postResponse->json()['data'] ?? [];
+        $paginationLinks = $postResponse->json()['links'] ?? [];
+        $meta = $postResponse->json()['meta'] ?? [];
         $currentPage = $meta['current_page'] ?? 1;
         $totalPages = $meta['total_pages'] ?? 1;
-        $totalposts = $meta['total_posts'] ?? 0; // Assuming `total_posts` is part of your meta
-    
-        // Pass the data to the Blade view
-        return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalposts'));
+        $totalposts = $meta['total_posts'] ?? 0;
+
+        // Fetch categories from the API
+        $categoryResponse = Http::withHeaders(['Authorization' => session('api_token')])
+            ->get(env('API_URL') . '/api/categories');
+        $categories = $categoryResponse->json()['data'] ?? [];
+
+        return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalposts', 'categories'));
     }
     
     

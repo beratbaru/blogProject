@@ -5,16 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
-use Closure;
 use Filament\Forms;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
 {
@@ -26,20 +24,14 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-
-                Forms\Components\TextInput::make('title')
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                    ->maxLength(255),    
-                Forms\Components\TextInput::make('slug')
-                    ->required(),
-                Forms\Components\ToggleButtons::make('status')
+                Forms\Components\TextInput::make('name')
                     ->required()
-                    ->options([
-                        '1' => 'active',
-                        '0' => 'passive',
-                    ]),
-
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->maxLength(255),
+                Toggle::make('status')
+                    ->required()
             ]);
     }
 
@@ -47,16 +39,13 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('categoryId')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('id')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('title')
-                    ->sortable()
-                    ->searchable(),
-
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -65,7 +54,6 @@ class CategoryResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-
             ])
             ->filters([
                 //

@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('content');
             $table->string('image');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->enum('status', ['passive','active']);
             $table->timestamps();
         });
+        
     }
 
     /**

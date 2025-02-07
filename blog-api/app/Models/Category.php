@@ -9,10 +9,10 @@ class Category extends Model
     //
     protected $fillable=[
         'slug',
-        'status',
-        'title'
+        'status'=>'boolean',
+        'name'
     ];
-    public function post(){
+    public function posts(){
         return $this->hasMany(Post::class);
     }
 }
