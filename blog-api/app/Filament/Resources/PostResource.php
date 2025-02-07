@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Card;
 
 class PostResource extends Resource
 {
@@ -25,6 +26,7 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
+                Card::make()->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
@@ -35,6 +37,7 @@ class PostResource extends Resource
                     ->image()
                     ->required()
                     ->directory(''),
+                ]),
                 Forms\Components\DatePicker::make('activationDate')
                     ->required(),
                 Forms\Components\DatePicker::make('deactivationDate')
@@ -49,6 +52,11 @@ class PostResource extends Resource
                         name: 'category',
                         titleAttribute: 'name'
                     ),
+                Forms\Components\Select::make('tags')
+                    ->relationship('tags', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable(),
             ]);
     }
 

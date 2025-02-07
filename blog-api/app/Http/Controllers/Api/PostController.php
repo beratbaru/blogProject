@@ -10,35 +10,43 @@ use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
     // Fetch all posts
-    public function index(Request $request)
-    {
-        $query = Post::withCount('comments')
-                     ->orderByDesc('comments_count')
-                     ->latest()
-                     ->where('status', 'active');
+public function index(Request $request)
+{
+    $query = Post::withCount('comments')
+                 ->with('tags') // Eager load tags
+                 ->orderByDesc('comments_count')
+                 ->latest()
+                 ->where('status', 'active');
 
-        // If a category filter is provided, apply it
-        if ($request->has('category_id') && !empty($request->input('category_id'))) {
-            $query->where('category_id', $request->input('category_id'));
-        }
-
-        $posts = $query->paginate(6);
-
-        return response()->json([
-            'message' => 'posts fetched successfully',
-            'data' => $posts->items(),
-            'links' => [
-                'previous' => $posts->previousPageUrl(),
-                'next' => $posts->nextPageUrl(),
-            ],
-            'meta' => [
-                'current_page' => $posts->currentPage(),
-                'total_pages' => $posts->lastPage(),
-                'total_posts' => $posts->total(),
-            ],
-        ], 200);
+    // Filter by category
+    if ($request->filled('category_id')) {
+        $query->where('category_id', $request->category_id);
     }
-    
+
+    // Filter by tag (if provided)
+    if ($request->filled('tag')) {
+        $query->whereHas('tags', function ($q) use ($request) {
+            $q->where('name', $request->tag);
+        });
+    }
+
+    $posts = $query->paginate(6);
+
+    return response()->json([
+        'message' => 'posts fetched successfully',
+        'data' => $posts->items(),
+        'links' => [
+            'previous' => $posts->previousPageUrl(),
+            'next' => $posts->nextPageUrl(),
+        ],
+        'meta' => [
+            'current_page' => $posts->currentPage(),
+            'total_pages' => $posts->lastPage(),
+            'total_posts' => $posts->total(),
+        ],
+    ], 200);
+}
+
 
     // public function popular(){
     //     $post = Post::withCount('comments')

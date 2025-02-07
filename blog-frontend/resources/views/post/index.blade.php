@@ -80,22 +80,29 @@
         });
     });
 </script>
-    <!-- Categories Navigation (Sticky) -->
     <nav class="sticky top-16 bg-white shadow-md z-40 border-b">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex overflow-x-auto space-x-4">
-            <!-- Link to show all posts -->
-            <a href="{{ route('post.index') }}"
-               class="px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap
-               {{ !request()->has('category_id') ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800' }}">
-                Tümü
-            </a>
-            @foreach($categories as $category)
-                <a href="{{ route('post.index', ['category_id' => $category['id']]) }}"
-                   class="px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap
-                   {{ request('category_id') == $category['id'] ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800' }}">
-                    {{ $category['name'] }}
-                </a>
-            @endforeach
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex space-x-4">
+            <!-- Category Filter -->
+            <form method="GET" class="flex space-x-4">
+                <select name="category_id" onchange="this.form.submit()" class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-800">
+                    <option value="">Tümü</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category['id'] }}" {{ request('category_id') == $category['id'] ? 'selected' : '' }}>
+                            {{ $category['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <!-- Tag Filter -->
+                <select name="tag" onchange="this.form.submit()" class="px-4 py-2 rounded-lg text-sm font-medium bg-gray-100 text-gray-800">
+                    <option value="">Tüm Etiketler</option>
+                    @foreach($tags as $tag)
+                        <option value="{{ $tag['name'] }}" {{ request('tag') == $tag['name'] ? 'selected' : '' }}>
+                            {{ $tag['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
         </div>
     </nav>
 

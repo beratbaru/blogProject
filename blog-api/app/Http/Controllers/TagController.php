@@ -12,7 +12,11 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all(); // Fetch all tags
+        return response()->json([
+            'message' => 'Tags fetched successfully',
+            'data' => $tags,
+        ]);
     }
 
     /**

@@ -11,24 +11,33 @@ class PostController extends Controller
     // Fetch all posts
     public function index(Request $request)
     {
-        // Fetch posts from the API. request()->query() will include category_id if set.
-        $postResponse = Http::withHeaders(['Authorization' => session('api_token')])
-            ->get(env('API_URL') . '/api/posts', $request->query());
-
+        // Include category_id and tag in the request query if set
+        $queryParams = $request->only(['category_id', 'tag']);
+    
+        // Fetch posts from API
+        $postResponse = Http::withHeaders([
+            'Authorization' => session('api_token')
+        ])->get(env('API_URL') . '/api/posts', $queryParams);
+    
         $posts = $postResponse->json()['data'] ?? [];
         $paginationLinks = $postResponse->json()['links'] ?? [];
         $meta = $postResponse->json()['meta'] ?? [];
         $currentPage = $meta['current_page'] ?? 1;
         $totalPages = $meta['total_pages'] ?? 1;
-        $totalposts = $meta['total_posts'] ?? 0;
-
-        // Fetch categories from the API
-        $categoryResponse = Http::withHeaders(['Authorization' => session('api_token')])
-            ->get(env('API_URL') . '/api/categories');
-        $categories = $categoryResponse->json()['data'] ?? [];
-
-        return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalposts', 'categories'));
+        $totalPosts = $meta['total_posts'] ?? 0;
+    
+        // Fetch categories
+        $categories = Http::withHeaders(['Authorization' => session('api_token')])
+            ->get(env('API_URL') . '/api/categories')->json()['data'] ?? [];
+    
+        // Fetch tags
+        $tags = Http::withHeaders(['Authorization' => session('api_token')])
+            ->get(env('API_URL') . '/api/tags')->json()['data'] ?? [];
+    
+        return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalPosts', 'categories', 'tags'));
     }
+    
+    
     
     
     

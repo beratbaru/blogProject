@@ -57,6 +57,7 @@
             <div class="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4">
                 <div class="flex items-center justify-between">
                     <h1 class="text-2xl font-bold text-white">{{ $post['title'] ?? 'Gönderi Başlığı' }}</h1>
+                    
                     <a href="{{ route('post.index') }}" 
                        class="flex items-center text-white hover:text-blue-100 transition-colors">
                         <i class="fas fa-arrow-left mr-2"></i> Geri Dön
@@ -135,6 +136,7 @@
                             <i class="fas fa-paper-plane mr-2"></i> Yorum Gönder
                         </button>
                     </div>
+                    
                 </div>
             </form>
         </section>
