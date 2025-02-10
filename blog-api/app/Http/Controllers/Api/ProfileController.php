@@ -61,7 +61,7 @@ class ProfileController extends Controller
     
         // Validate the incoming data, including the name field
         $validated = $request->validate([
-            'name' => 'required|string|max:255', // Add validation for the name field
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $profile->id,
             'password' => 'sometimes|required|string|min:6',
         ]);

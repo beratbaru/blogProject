@@ -35,42 +35,7 @@ class UserController extends Controller
         return redirect()->back()->withErrors(
             $response->json('errors') ?? ['api_error' => 'Kayıt Başarısız.']
         );
-    }
-    
-
-    // Login Method
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-    
-        // Send login request to backend
-        $response = Http::post('http://api_nginx/api/login', [
-            'email' => $request->email,
-            'password' => $request->password,
-        ]);
-    
-        // Debugging: Output response for testing
-        // dd($response->json());
-    
-        // Check if login was successful
-        if ($response->successful() && isset($response['token'])) {
-            // Store token in session
-            session([
-                'api_token' => $response['token'],
-            ]);
-    
-            return redirect()->route('product.index')->with('success', 'Giriş başarılı!');
-        }
-    
-        // Handle login errors
-        $errorMessage = $response->json('message') ?? 'Giriş başarısız.';
-        return back()->withErrors(['login' => $errorMessage]);
-    }
-    
-    
+    }    
 
     // Logout Method
     public function logout()

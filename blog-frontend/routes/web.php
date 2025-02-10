@@ -49,9 +49,6 @@ Route::get('/main', function () {
     return view('main');
 })->name('main')->middleware(CheckLogin::class);
 
-// Test API Endpoint
-Route::get('/apitest', [PostController::class, 'apitest']);
-
 // Logout Route
 Route::post('/logout', function () {
     session()->forget('api_token');
