@@ -20,7 +20,7 @@
                 <input type="email" 
                        name="email" 
                        id="email" 
-                       required 
+                        
                        placeholder="E-postanızı girin" 
                        value="{{ old('email') }}" 
                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
@@ -31,7 +31,7 @@
                 <input type="password" 
                        name="password" 
                        id="password" 
-                       required 
+                        
                        placeholder="Şifrenizi girin" 
                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
             </div>

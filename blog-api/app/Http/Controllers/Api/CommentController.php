@@ -24,7 +24,7 @@ class CommentController extends Controller
         ]);
 
         $comment = Comment::create([
-            'user_id' => auth()->id(),
+            'user_id' => auth()->id(),  
             'post_id' => $post->id,
             'content' => $request->content,
             'status' => '0', // Default status (pending)

@@ -30,6 +30,9 @@ class PostResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\Textarea::make('content')
                     ->required()
                     ->columnSpanFull(),
@@ -42,21 +45,20 @@ class PostResource extends Resource
                     ->required(),
                 Forms\Components\DatePicker::make('deactivationDate')
                     ->required(),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-                Toggle::make('status')
-                    ->required(),
-                Select::make('category_id')
+
+                Card::make()->schema([
+                    Select::make('category_id')
                     ->relationship(
                         name: 'category',
                         titleAttribute: 'name'
                     ),
-                Forms\Components\Select::make('tags')
-                    ->relationship('tags', 'name')
-                    ->multiple()
-                    ->preload()
-                    ->searchable(),
+                    Forms\Components\Select::make('tags')
+                        ->relationship('tags', 'name')
+                        ->multiple()
+                        ->preload()
+                        ->searchable(),
+                ]),
+
             ]);
     }
 
