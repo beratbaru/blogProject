@@ -88,7 +88,7 @@
                     <p class="text-gray-700 leading-relaxed">{{ $post['content'] ?? 'Gönderi içeriği' }}</p>
                 </div>
                 <div class="rounded-xl overflow-hidden shadow-lg">
-                    <img src="{{ 'http://' . env('API_URL') . '/storage/' . $post['image'] }}" 
+                    <img src="{{ 'http://localhost:8000'.'/'.$post['image'] }}" 
                          alt="Gönderi görseli" 
                          class="w-full h-96 object-cover transform hover:scale-105 transition-transform duration-300">
                 </div>

@@ -118,7 +118,7 @@
                 <!-- Featured Image -->
                 <div class="relative h-48 overflow-hidden">
                     <a href="{{ route('post.show', $post['id']) }}">
-                        <img src="{{ 'http://'.env('API_URL').'/storage/'.$post['image'] }}" 
+                        <img src="{{ 'http://localhost:8000'.'/'.$post['image'] }}" 
                              alt="Post image" 
                              class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300">
                     </a>

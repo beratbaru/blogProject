@@ -81,6 +81,8 @@ To check running containers:
 
 docker ps
 
+I tested mails using mailtrap and queues using horizon.
+
 🎯 Features
 
 User authentication (Login/Register)

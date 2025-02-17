@@ -46,14 +46,6 @@ public function index(Request $request)
         ],
     ], 200);
 }
-
-
-    // public function popular(){
-    //     $post = Post::withCount('comments')
-    //     ->orderBy('comments_count', 'desc')
-    //     ->get();
-    //     return response()->json($post);
-    // }
     
     
 
