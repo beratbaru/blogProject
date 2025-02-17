@@ -129,13 +129,11 @@
                     <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $post['title'] }}</h3>
                     <p class="text-gray-600 line-clamp-3 mb-4">{{ $post['content'] }}</p>
                     <div class="flex items-center justify-between text-sm text-gray-500">
-                        <span class="flex items-center">
-                            <i class="fas fa-clock mr-2"></i>
-                        </span>
+
                         <span class="flex items-center">
                             <i class="fas fa-comment mr-2"></i>
                             @if($post['comments_count']>=1)
-                            {{ $post['comments_count'] ?? 0 }} yorum
+                            {{ $post['comments_count'] ?? 0 }}
                             @endif
                         </span>
                     </div>
