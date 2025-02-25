@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class PolicyController extends Controller
 {
-    // Fetch and show the KVKK policy
     public function showKvkkPolicy()
     {
         $response = Http::withHeaders(['Authorization' => session('api_token')])
@@ -23,7 +22,6 @@ class PolicyController extends Controller
         return view('policy.kvkk')->with('error', 'Could not fetch KVKK policy.');
     }
 
-    // Fetch and show the Security policy
     public function showSecurityPolicy()
     {
         $response = Http::withHeaders(['Authorization' => session('api_token')])

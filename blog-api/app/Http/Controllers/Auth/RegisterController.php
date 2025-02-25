@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
-/*class RegisterController extends Controller
+class RegisterController extends Controller
 {
-    public function showRegistrationForm()
+   /* public function showRegistrationForm()
     {
         return view('auth.register');
     }
@@ -34,5 +34,5 @@ use Illuminate\Support\Facades\Hash;
         ]);
 
         return redirect()->route('login')->with('success', 'Kayıt başarılı! Giriş yapın.');
-    }
+    }*/
 }

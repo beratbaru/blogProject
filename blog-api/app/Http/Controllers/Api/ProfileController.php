@@ -53,28 +53,24 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        $profile = $request->user(); // Get the authenticated user
+        $profile = $request->user();
     
         if (!$profile) {
             return response()->json(['message' => 'Kullanıcı bulunamadı.'], 404);
         }
     
-        // Validate the incoming data, including the name field
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $profile->id,
             'password' => 'sometimes|required|string|min:6',
         ]);
     
-        // Hash the password if provided
         if (isset($validated['password'])) {
             $validated['password'] = bcrypt($validated['password']);
         }
     
-        // Update the profile with the new data
         $profile->update($validated);
     
-        // Return success response
         return response()->json([
             'message' => 'Profiliniz başarıyla güncellendi.',
             'data' => $profile,

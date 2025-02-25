@@ -8,13 +8,10 @@ use App\Models\post;
 use Illuminate\Pagination\LengthAwarePaginator;
 class PostController extends Controller
 {
-    // Fetch all posts
     public function index(Request $request)
     {
-        // Include category_id and tag in the request query if set
         $queryParams = $request->only(['category_id', 'tag']);
     
-        // Fetch posts from API
         $postResponse = Http::withHeaders([
             'Authorization' => session('api_token')
         ])->get(env('API_URL') . '/api/posts', $queryParams);
@@ -26,33 +23,20 @@ class PostController extends Controller
         $totalPages = $meta['total_pages'] ?? 1;
         $totalPosts = $meta['total_posts'] ?? 0;
     
-        // Fetch categories
         $categories = Http::withHeaders(['Authorization' => session('api_token')])
             ->get(env('API_URL') . '/api/categories')->json()['data'] ?? [];
     
-        // Fetch tags
         $tags = Http::withHeaders(['Authorization' => session('api_token')])
             ->get(env('API_URL') . '/api/tags')->json()['data'] ?? [];
     
         return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalPosts', 'categories', 'tags'));
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-
-    // Show the form to create a new post
     public function create()
     {
         return view('post.create');
     }
 
-    // Store a new post
     public function store(Request $request)
     {
         $response = Http::withHeaders(['Authorization'=>session('api_token')])->post(env('API_URL') . '/api/posts', $request->all());
@@ -64,70 +48,55 @@ class PostController extends Controller
         return back()->withErrors($response->json()['errors'] ?? ['API error'])->withInput();
     }
 
-    // Read (view) a single post's details (renders show.blade.php)
     public function show($id, Request $request)
     {
         $response = Http::withHeaders(['Authorization'=>session('api_token')])->get(env('API_URL') . '/api/posts/'. $id, $request->all());
 
         if ($response->successful()) {
-            $post = $response->json()['data']; // Extract the "data" key
-            return view('post.show', compact('post')); // Pass the post data to the view
+            $post = $response->json()['data'];
+            return view('post.show', compact('post'));
         }
     
-        return redirect()->route('post.index')->with('error', 'Ürün bilgisi alınamadı.'); // Handle API errors
+        return redirect()->route('post.index')->with('error', 'Ürün bilgisi alınamadı.');
     }
     
-    
-
-    // Update a post
     public function update(Request $request, $id)
-    {
-        
-        // Validate the input fields
+    {  
         $validated = $request->validate([
             'post_name' => 'required|string|max:255',
-            'post_price' => 'required|numeric|min:0.1|max:99999999.99', // Allows up to 10 digits, 2 decimals
+            'post_price' => 'required|numeric|min:0.1|max:99999999.99', 
             'description' => 'required|string',
         ]);
     
-        // Send a PUT request to update the post
         $response = Http::acceptJson()
             ->withHeaders([
-                'Authorization' => session('api_token'), // Include the token for authorization
+                'Authorization' => session('api_token'),
             ])
-            ->put(env('API_URL') . '/api/posts/' . $id, $validated); // Send validated data
+            ->put(env('API_URL') . '/api/posts/' . $id, $validated);
     
-        // Check if the response was successful
         if ($response->successful()) {
             return redirect()->route('post.index')->with('success', 'Ürün başarıyla güncellendi.');
         }
     
-        // If the request failed, redirect with an error message
         return redirect()->route('post.index')->with('error', 'Ürün güncellenirken bir hata oluştu.');
     }
     
     public function edit($id, Request $request)
 {
-    // Send a GET request to fetch the post by ID
     $response = Http::acceptJson()
         ->withHeaders([
-            'Authorization' => session('api_token'), // Include the token for authorization
+            'Authorization' => session('api_token'),
         ])
         ->get(env('API_URL') . '/api/posts/' . $id);
 
-    // Check if the response is successful
     if ($response->successful()) {
-        // Get the post data
-        $post = $response->json()['data']; // The data comes under 'data' in the response
-        return view('post.edit', compact('post')); // Return the edit view with the post data
+        $post = $response->json()['data'];
+        return view('post.edit', compact('post'));
     }
 
-    // If the post fetch fails, redirect with an error message
     return redirect()->route('post.index')->with('error', 'Ürün bilgisi alınamadı.');
 }
 
-
-    // Delete a post
     public function destroy($id, Request $request)
     {
         $response = Http::withHeaders(['Authorization'=>session('api_token')])->delete(env('API_URL') . '/api/posts/'. $id, $request->all());

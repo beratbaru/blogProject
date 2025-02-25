@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login'); // Blade dosyanızın adı
+        return view('auth.login'); 
     }
 
     public function login(Request $request)
@@ -21,18 +21,12 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
     
-        // Send login request to backend
         $response = Http::post('http://api_nginx/api/login', [
             'email' => $request->email,
             'password' => $request->password,
         ]);
     
-        // Debugging: Output response for testing
-        // dd($response->json());
-    
-        // Check if login was successful
         if ($response->successful() && isset($response['token'])) {
-            // Store token in session
             session([
                 'api_token' => $response['token'], 'user' => $response['user'],
                 
@@ -41,7 +35,6 @@ class LoginController extends Controller
             return redirect()->route('post.index')->with('success', 'Giriş başarılı!');
         }
     
-        // Handle login errors
         $errorMessage = $response->json('message') ?? 'Giriş başarısız.';
         return back()->withErrors(['login' => $errorMessage]);
     }

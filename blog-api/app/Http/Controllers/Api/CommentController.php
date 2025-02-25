@@ -27,7 +27,7 @@ class CommentController extends Controller
             'user_id' => auth()->id(),  
             'post_id' => $post->id,
             'content' => $request->content,
-            'status' => '0', // Default status (pending)
+            'status' => '0',
         ]);
         \Illuminate\Support\Facades\Mail::to('berat123@gmail.com')->queue(
             new CommentPosted($comment)
@@ -36,4 +36,3 @@ class CommentController extends Controller
         return response()->json($comment, 201);
     }
 }
-// buniktunik

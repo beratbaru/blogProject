@@ -22,14 +22,11 @@ class CommentController extends Controller
             ->withErrors($response->json()['errors'] ?? ['API error'])
             ->withInput();
     }
-    // CommentController.php
     public function show($postId)
     {
-        // Fetch the post data
         $responsePost = Http::withHeaders(['Authorization' => session('api_token')])
             ->get(env('API_URL') . "/api/posts/{$postId}");
     
-        // Fetch comments for the post
         $responseComments = Http::withHeaders(['Authorization' => session('api_token')])
             ->get(env('API_URL') . "/api/posts/{$postId}/comments");
 
@@ -37,7 +34,6 @@ class CommentController extends Controller
         $post = $responsePost->json()['data'] ?? null;
         $comments = $responseComments->successful() ? $responseComments->json() : [];
         
-        // Pass both post and comments to the view
         return view('post.show', compact('post', 'comments', 'postId'));
     }
     

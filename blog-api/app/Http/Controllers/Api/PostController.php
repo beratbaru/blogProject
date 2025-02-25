@@ -9,21 +9,18 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
-    // Fetch all posts
 public function index(Request $request)
 {
     $query = Post::withCount('comments')
-                 ->with('tags') // Eager load tags
+                 ->with('tags')  
                  ->orderByDesc('comments_count')
                  ->latest()
                  ->where('status', 'active');
 
-    // Filter by category
     if ($request->filled('category_id')) {
         $query->where('category_id', $request->category_id);
     }
 
-    // Filter by tag (if provided)
     if ($request->filled('tag')) {
         $query->whereHas('tags', function ($q) use ($request) {
             $q->where('name', $request->tag);
@@ -49,7 +46,6 @@ public function index(Request $request)
     
     
 
-    // Store a new post
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -73,7 +69,6 @@ public function index(Request $request)
         ], 201);
     }
 
-    // Show a single post
     public function show($id)
     {
         $post = post::find($id);
@@ -88,36 +83,27 @@ public function index(Request $request)
         ]);
     }
 
-    // Update an existing post
     public function update(Request $request, $id)
     {
-        // Find the post by its ID
         $post = post::find($id);
     
         if (!$post) {
             return response()->json(['message' => 'Ürün bulunamadı.'], 404);
         }
     
-        // Validate the incoming data
         $validated = $request->validate([
             'post_name' => 'required|string|max:255',
             'post_price' => 'required|numeric',
             'description' => 'nullable|string',
         ]);
     
-        // Update the post with the new data
         $post->update($validated);
     
-        // Return success response
         return response()->json([
             'message' => 'Ürün başarıyla güncellendi.',
             'data' => $post,
         ], 200);
     }
-    
-
-    // Delete a post
-// kleapi/app/Http/Controllers/Api/PostController.php
 
 public function destroy($id)
 {

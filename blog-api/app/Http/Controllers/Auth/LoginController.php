@@ -9,10 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function showLoginForm()
-    {
-        return view('auth.login'); // Blade dosyanızın adı
-    }
+/*
 
     public function login(Request $request)
     {
@@ -25,5 +22,5 @@ class LoginController extends Controller
     return back()->withErrors([
         'email' => 'Girdiğiniz bilgiler hatalı.',
     ]);
-    }
+    }*/
 }

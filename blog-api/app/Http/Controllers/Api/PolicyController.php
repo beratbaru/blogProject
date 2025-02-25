@@ -9,10 +9,8 @@ class PolicyController extends Controller
 {
     public function getPolicies()
     {
-        // Fetch the first policy (assuming only one policy record)
         $policy = Policy::first();
 
-        // Check if the policy exists
         if ($policy) {
             return response()->json([
                 'kvkk_policy' => $policy->kvkk_policy,
