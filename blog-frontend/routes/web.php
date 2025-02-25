@@ -1,17 +1,14 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckLogin;
 use App\Http\Controllers\PolicyController;
-
-Route::get('/', function () {
-    return view('post.index');
-});
-
 // Resource Route for posts (handles all CRUD routes)
 Route::resource('post', PostController::class);
 
@@ -23,8 +20,9 @@ Route::get('/policy/policy', [PolicyController::class, 'showSecurityPolicy'])->n
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
+Route::get('/', [PostController::class, 'index']);
 
-Route::get('login', [UserController::class, 'showLoginForm'])->name('login');
+Route::get('login', [UserController::class, 'showLoginForm'])->name('login'); 
 Route::post('login', [UserController::class, 'login'])->name('login.submit');
 
 Route::delete('/posts/{id}', [PostController::class, 'destroy'])->middleware(CheckLogin::class);
@@ -33,7 +31,11 @@ Route::get('/register', function () {
     return view('register');
 })->name('register');
 
-Route::post('/register', [UserController::class, 'register'])->name('register.submit');
+Route::post('/register', [UserController::class, 'register'])->name('register.submit'); // Registration submission
+
+Route::get('/test', function () {
+    return view('test');
+})->name('test');
 
 Route::get('/main', function () {
     return view('main');

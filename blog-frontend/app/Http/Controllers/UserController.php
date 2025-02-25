@@ -15,7 +15,7 @@ class UserController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
     
-        $response = Http::post('http://api_nginx/api/register', [
+        $response = Http::post(env('API_URL').'/api/register', [
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
@@ -34,7 +34,7 @@ class UserController extends Controller
 
     public function logout()
     {
-        $response = Http::withToken(session('api_token'))->post('http://api_nginx/api/logout');
+        $response = Http::withToken(session('api_token'))->post(env('API_URL').'/api/logout');
     
         session()->forget(['api_token', 'user_name', 'user']);
     
@@ -74,7 +74,7 @@ class UserController extends Controller
     
         return redirect('/post')->withErrors(['update' => 'Profil güncellemesi başarısız.']);
     }
-    
+
     public function showLoginForm()
     {
         return view('auth.login'); 
@@ -87,7 +87,7 @@ class UserController extends Controller
             'password' => 'required',
         ]);
     
-        $response = Http::post('http://api_nginx/api/login', [
+        $response = Http::post(env('API_URL').'/api/login', [
             'email' => $request->email,
             'password' => $request->password,
         ]);

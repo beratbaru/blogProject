@@ -1,3 +1,6 @@
 /public/storage
 .env
 /storage
+/vendor
+/node_modules
+/mysql_data

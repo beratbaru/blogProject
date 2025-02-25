@@ -102,6 +102,10 @@
                         </option>
                     @endforeach
                 </select>
+                <a href="{{ route('post.index') }}" class="px-4 py-2 bg-red-500 text-white rounded-lg text-sm font-medium">
+                    Temizle
+                </a>
+
             </form>
         </div>
     </nav>
