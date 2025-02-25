@@ -1,29 +1,15 @@
 To Do List:
 
-<!-- -make the posts visible on the frontend +
-
--CREATING EDIT PROFILE LOGIC +
-
--RELATIONSHIPS +
-
--MAKE THE IMAGES APPEAR PROPERLY -
-
--ADD COMMENTS 
-
--CATEGORIZE THE POSTS
-
-///
-
--- ADDED COMMENTS, MAKE STATUS OF THE COMMENTS WORK + 
-
--- working on (comments->mail & queue) and (post->scheduling). +
-
--- make it so the posts will list based on popularity. + 
-
--- still have to queue the mails. + 
-
--- will create categories for the posts. + 
-
--- create filters.
-
--- create kvkk and security policies lastly to call an end to the project. -->
+1. vendor node_modules gibi klasörlerdeki kodların kaldırılması gerekiyor. bunların repo'ya yollanmaması gerekiyor.
+2. mysql_data'nında yollanmaması lazım.
+3. request validation kullanılacak.
+4. 'berat123@gmail.com' bu tarz statik şeyler olmamalı. env üzerinden config'den alınmalı.
+5. policies tek key ile tek satır policy gelmeli.
+6. api'deki response yapısının düzenlenmesi gerekiyor. bunun için bir response class'ı oluşturulabilir.
+7. kategori verileri db'den fe'den direk alınıyor.
+8. 
+Http::withHeaders(['Authorization' => session('api_token')])
+->post(env('API_URL') . "/api/posts/{$postId}/comments", $request->all());
+bu kod çok tekrar ediliyor. bunun yerine bir fonksiyon yazılabilir.
+9. bir çok gereksiz yorum satırları bulunuyor. bunlar kaldırılmalı. (done)
+10. http://api_nginx/api/login -> api_nginx env üzerinden config'den belirtilen değer gelmeli.
