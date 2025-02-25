@@ -75,5 +75,34 @@ class UserController extends Controller
         return redirect('/post')->withErrors(['update' => 'Profil güncellemesi başarısız.']);
     }
     
+    public function showLoginForm()
+    {
+        return view('auth.login'); 
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        $response = Http::post('http://api_nginx/api/login', [
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+    
+        if ($response->successful() && isset($response['token'])) {
+            session([
+                'api_token' => $response['token'], 'user' => $response['user'],
+                
+            ]);
+    
+            return redirect()->route('post.index')->with('success', 'Giriş başarılı!');
+        }
+    
+        $errorMessage = $response->json('message') ?? 'Giriş başarısız.';
+        return back()->withErrors(['login' => $errorMessage]);
+    }
     
 }

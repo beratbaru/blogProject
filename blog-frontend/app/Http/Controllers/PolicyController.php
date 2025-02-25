@@ -24,6 +24,7 @@ class PolicyController extends Controller
 
     public function showSecurityPolicy()
     {
+        
         $response = Http::withHeaders(['Authorization' => session('api_token')])
             ->get(env('API_URL') . "/api/policies");
 
