@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Validator;
 class ProfileController extends Controller
 {
@@ -51,7 +52,7 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(UpdateProfileRequest $request)
     {
         $profile = $request->user();
     
@@ -59,11 +60,7 @@ class ProfileController extends Controller
             return response()->json(['message' => 'Kullanıcı bulunamadı.'], 404);
         }
     
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $profile->id,
-            'password' => 'sometimes|required|string|min:6',
-        ]);
+        $validated = $request->validated();
     
         if (isset($validated['password'])) {
             $validated['password'] = bcrypt($validated['password']);
@@ -76,6 +73,7 @@ class ProfileController extends Controller
             'data' => $profile,
         ], 200);
     }
+    
     
 
 

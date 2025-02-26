@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -45,39 +46,28 @@ class AuthController extends Controller
     
     
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => 'required|string|min:6',
-        ], [
-            'name.required' => 'İsim alanı boş bırakılamaz.',
-            'name.string' => 'İsim yalnızca metin içermelidir.',
-            'name.max' => 'İsim en fazla 255 karakter olabilir.',
-            'email.required' => 'E-posta alanı boş bırakılamaz.',
-            'email.string' => 'E-posta yalnızca metin içermelidir.',
-            'email.email' => 'Geçerli bir e-posta adresi giriniz.',
-            'email.max' => 'E-posta en fazla 255 karakter olabilir.',
-            'email.unique' => 'Bu e-posta zaten kayıtlı.',
-            'password.required' => 'Şifre alanı boş bırakılamaz.',
-            'password.string' => 'Şifre yalnızca metin içermelidir.',
-            'password.min' => 'Şifre en az 6 karakter olmalıdır.',
-        ]);
+        $validated = $request->validated();
+    
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            
         ]);
+    
         if ($user) {
             return response()->json([
-                'message' => 'Kayıt Başarılı.',
+                'message' => 'Kayıt başarılı.',
             ], 201);
         }
+    
         return response()->json([
-            'message' => 'Bir şeyler ters gitti.',
+            'message' => 'Bir şeyler ters gitti, lütfen tekrar deneyin.',
         ], 500);
     }
+    
     
 
     public function logout(Request $request)

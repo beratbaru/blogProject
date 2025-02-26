@@ -1,9 +1,9 @@
 To Do List:
 
 <!-- 1. vendor node_modules gibi klasörlerdeki kodların kaldırılması gerekiyor. bunların repo'ya yollanmaması gerekiyor.
-2. mysql_data'nında yollanmaması lazım. -->
+2. mysql_data'nında yollanmaması lazım.
 3. request validation kullanılacak.
-<!-- 4. 'berat123@gmail.com' bu tarz statik şeyler olmamalı. env üzerinden config'den alınmalı. -->
+4. 'berat123@gmail.com' bu tarz statik şeyler olmamalı. env üzerinden config'den alınmalı. -->
 5. policies tek key ile tek satır policy gelmeli.
 6. api'deki response yapısının düzenlenmesi gerekiyor. bunun için bir response class'ı oluşturulabilir.
 7. kategori verileri db'den fe'den direk alınıyor.

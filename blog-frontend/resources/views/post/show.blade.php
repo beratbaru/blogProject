@@ -131,6 +131,16 @@
                     </div>
                 </div>
             </form>
+            @if ($errors->any())
+                <div class="bg-red-900/30 border-l-4 border-red-600 text-red-300 p-4 rounded-lg">
+                    <p class="font-bold">Hata!</p>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </section>
     </div>
 </div>

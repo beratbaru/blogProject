@@ -3,6 +3,7 @@
 @section('content')
 <div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-50 to-purple-50">
     <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md transform transition-all hover:scale-105">
+    
         <form action="{{ route('register') }}" method="POST" class="space-y-6">
             @csrf
             <h3 class="text-2xl font-bold text-gray-800 text-center mb-6">Kayıt Ol</h3>
@@ -68,6 +69,7 @@
                 Zaten hesabınız var mı? 
                 <a href="{{ route('login') }}" class="text-blue-600 hover:underline">Giriş Yap</a>
             </p>
+            
         </form>
     </div>
 </div>

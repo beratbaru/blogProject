@@ -11,16 +11,16 @@ class CommentController extends Controller
     
     public function store(Request $request, $postId)
     {
-        $response = Http::withHeaders(['Authorization' => session('api_token')])
-            ->post(env('API_URL') . "/api/posts/{$postId}/comments", $request->all());
+        $response = Http::withHeaders([
+            'Authorization' => session('api_token'),
+            'Accept' => 'application/json'
+        ])->post(env('API_URL') . "/api/posts/{$postId}/comments", $request->all());
     
         if ($response->successful()) {
             return redirect()->back()->with('success', 'Yorumunuz incelemeye gönderildi!');
         }
     
-        return back()
-            ->withErrors($response->json()['errors'] ?? ['API error'])
-            ->withInput();
+        return back()->withErrors($response->json('errors', ['Bilinmeyen bir hata oluştu.']))->withInput();
     }
     public function show($postId)
     {

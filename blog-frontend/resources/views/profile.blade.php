@@ -74,6 +74,7 @@
 <section class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl mx-auto">
         <div class="bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-700">
+        
             <div class="bg-gradient-to-r from-blue-1000 to-purple-1000 px-6 py-4">
                 <div class="flex items-center justify-between">
                     <h1 class="text-2xl font-bold text-gray-100">Profil Bilgileri</h1>
@@ -141,7 +142,9 @@
             </div>
         </div>
     </div>
+    
 </section>
+
 
 @endif
 <script>

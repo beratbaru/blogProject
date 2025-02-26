@@ -9,19 +9,15 @@ class UserController extends Controller
 {
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-    
-        $response = Http::post(env('API_URL').'/api/register', [
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+        ])->post(env('API_URL') . '/api/register', [
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
             'password_confirmation' => $request->password_confirmation,
         ]);
-    
+        
         if ($response->successful()) {
             return redirect()->route('login')->with('success', 'Kayıt Başarılı!');
         }
@@ -58,21 +54,19 @@ class UserController extends Controller
             );
         }
     }
-    public function update(Request $request) 
-    { 
-        $request['id'] = session('user')['id']; 
-    
-        $response = Http::acceptJson()
-            ->withHeaders(['Authorization' => session('api_token')])
-            ->put(env('API_URL').'/api/profile', $request->all()); 
+
+    public function update(Request $request)
+    {
+        $response = Http::withHeaders([
+            'Authorization' => session('api_token'),
+            'Accept' => 'application/json',
+        ])->put(env('API_URL') . "/api/profile", $request->all());
     
         if ($response->successful()) {
-            session(['user' => $response->json('data')]);
-    
-            return redirect('/post')->with('status', 'Profiliniz başarıyla güncellendi.');
+            return redirect()->back()->with('success', 'Profiliniz başarıyla güncellendi!');
         }
     
-        return redirect('/post')->withErrors(['update' => 'Profil güncellemesi başarısız.']);
+        return back()->withErrors($response->json('errors', ['Bilinmeyen bir hata oluştu.']))->withInput();
     }
 
     public function showLoginForm()
