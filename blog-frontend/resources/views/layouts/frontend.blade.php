@@ -6,7 +6,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Ürünler</title>
+    <title>Post</title>
     @vite('resources/css/app.css')
     
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

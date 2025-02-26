@@ -83,40 +83,9 @@ public function index(Request $request)
         ]);
     }
 
-    public function update(Request $request, $id)
-    {
-        $post = post::find($id);
-    
-        if (!$post) {
-            return response()->json(['message' => 'Ürün bulunamadı.'], 404);
-        }
-    
-        $validated = $request->validate([
-            'post_name' => 'required|string|max:255',
-            'post_price' => 'required|numeric',
-            'description' => 'nullable|string',
-        ]);
-    
-        $post->update($validated);
-    
-        return response()->json([
-            'message' => 'Ürün başarıyla güncellendi.',
-            'data' => $post,
-        ], 200);
-    }
 
-public function destroy($id)
-{
-    $post = post::find($id);
-    
-    if (!$post) {
-        return response()->json(['message' => 'Ürün bulunamadı.'], 404);
-    }
 
-    $post->delete();
 
-    return response()->json(['message' => 'Ürün başarıyla silindi.'], 200);
-}
 
 
 }

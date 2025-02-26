@@ -16,10 +16,16 @@ class DatabaseSeeder extends Seeder
         $this->call(ShieldSeeder::class);
         // User::factory(10)->create();
         User::factory()->create([
+            'name' => 'berat',
+            'email' => 'berat12@gmail.com',
+            'password' => password_hash('berat123', PASSWORD_DEFAULT)
+        ])->assignRole('super-admin');
+        User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => password_hash('admin123', PASSWORD_DEFAULT)
         ])->assignRole('super-admin');
+
         User::factory()->create([
             'name' => 'author',
             'email' => 'author@gmail.com',

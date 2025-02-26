@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Mail\CommentPosted;
+use App\Models\User;
 class CommentController extends Controller
 {
     public function index(Post $post)
@@ -29,7 +30,8 @@ class CommentController extends Controller
             'content' => $request->content,
             'status' => '0',
         ]);
-        \Illuminate\Support\Facades\Mail::to('berat123@gmail.com')->queue(
+        $admin = User::role('super-admin')->pluck('email')->toArray();//Spatie HasRoles (https://spatie.be/docs/laravel-permission/v6/basic-usage/basic-usage) kullanarak süper admin rolü olan kullanıcıları bir değişkene atıyorum
+        \Illuminate\Support\Facades\Mail::to($admin)->queue(
             new CommentPosted($comment)
             );
         

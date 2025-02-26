@@ -31,11 +31,7 @@ Route::get('/register', function () {
     return view('register');
 })->name('register');
 
-Route::post('/register', [UserController::class, 'register'])->name('register.submit'); // Registration submission
-
-Route::get('/test', function () {
-    return view('test');
-})->name('test');
+Route::post('/register', [UserController::class, 'register'])->name('register.submit');
 
 Route::get('/main', function () {
     return view('main');

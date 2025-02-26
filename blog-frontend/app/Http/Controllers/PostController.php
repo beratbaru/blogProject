@@ -60,54 +60,10 @@ class PostController extends Controller
         return redirect()->route('post.index')->with('error', 'Ürün bilgisi alınamadı.');
     }
     
-    public function update(Request $request, $id)
-    {  
-        $validated = $request->validate([
-            'post_name' => 'required|string|max:255',
-            'post_price' => 'required|numeric|min:0.1|max:99999999.99', 
-            'description' => 'required|string',
-        ]);
-    
-        $response = Http::acceptJson()
-            ->withHeaders([
-                'Authorization' => session('api_token'),
-            ])
-            ->put(env('API_URL') . '/api/posts/' . $id, $validated);
-    
-        if ($response->successful()) {
-            return redirect()->route('post.index')->with('success', 'Ürün başarıyla güncellendi.');
-        }
-    
-        return redirect()->route('post.index')->with('error', 'Ürün güncellenirken bir hata oluştu.');
-    }
-    
-    public function edit($id, Request $request)
-{
-    $response = Http::acceptJson()
-        ->withHeaders([
-            'Authorization' => session('api_token'),
-        ])
-        ->get(env('API_URL') . '/api/posts/' . $id);
-
-    if ($response->successful()) {
-        $post = $response->json()['data'];
-        return view('post.edit', compact('post'));
-    }
-
-    return redirect()->route('post.index')->with('error', 'Ürün bilgisi alınamadı.');
-}
-
-    public function destroy($id, Request $request)
-    {
-        $response = Http::withHeaders(['Authorization'=>session('api_token')])->delete(env('API_URL') . '/api/posts/'. $id, $request->all());
 
     
-        if ($response->successful()) {
-            return redirect()->route('post.index')->with('success', 'Ürün başarıyla silindi.');
-        }
-    
-        return redirect()->route('post.index')->with('error', 'Ürün silinirken bir hata oluştu.');
-    }
+
+
     
     
 }

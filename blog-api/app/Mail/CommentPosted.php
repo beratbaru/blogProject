@@ -28,7 +28,7 @@ class CommentPosted extends Mailable
     {
         return new Envelope(
             subject: 'Comment Posted',
-            from: 'admin@gmail.com', 
+            from: 'test@gmail.com', 
         );
     }
 
