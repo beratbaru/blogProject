@@ -153,7 +153,6 @@ document.getElementById('menuButton').addEventListener('click', function() {
     dropdown.classList.toggle('hidden');
 });
 
-// Close dropdown when clicking outside
 document.addEventListener('click', function(event) {
     const menuButton = document.getElementById('menuButton');
     const dropdown = document.getElementById('menuDropdown');
