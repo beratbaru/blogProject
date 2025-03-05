@@ -43,31 +43,6 @@ public function index(Request $request)
         ],
     ], 200);
 }
-    
-    
-
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'post_name' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'post_price' => 'required|numeric|min:1',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation errors',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $post = post::create($request->only(['post_name', 'description', 'post_price']));
-
-        return response()->json([
-            'message' => 'post created successfully',
-            'data' => $post,
-        ], 201);
-    }
 
     public function show($id)
     {
@@ -82,10 +57,4 @@ public function index(Request $request)
             'data' => $post,
         ]);
     }
-
-
-
-
-
-
 }

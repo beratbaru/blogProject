@@ -32,22 +32,6 @@ class PostController extends Controller
         return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalPosts', 'categories', 'tags'));
     }
     
-    public function create()
-    {
-        return view('post.create');
-    }
-
-    public function store(Request $request)
-    {
-        $response = Http::withHeaders(['Authorization'=>session('api_token')])->post(env('API_URL') . '/api/posts', $request->all());
-
-        if ($response->successful()) {
-            return redirect()->route('post.index')->with('success', 'post created successfully.');
-        }
-
-        return back()->withErrors($response->json()['errors'] ?? ['API error'])->withInput();
-    }
-
     public function show($id, Request $request)
     {
         $response = Http::withHeaders(['Authorization'=>session('api_token')])->get(env('API_URL') . '/api/posts/'. $id, $request->all());

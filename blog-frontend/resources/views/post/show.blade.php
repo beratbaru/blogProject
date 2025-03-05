@@ -2,8 +2,22 @@
 
 @section('content')
 @if(!session('api_token'))
-<!-- ... existing guest content remains the same ... -->
-@else
+<div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
+<div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
+    <div class="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+        <h3 class="text-2xl font-bold text-white mb-6">Verileri görmek için giriş yapınız.</h3>
+        <div class="flex justify-center gap-4">
+            <a href="{{ route('register') }}" 
+               class="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105">
+                Kayıt Ol
+            </a>
+            <a href="{{ route('login') }}" 
+               class="px-6 py-2 border-2 border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition-colors">
+                Giriş Yap
+            </a>
+        </div>
+    </div>
+</div></div>@else
 <header class="sticky top-0 bg-gray-800/80 backdrop-blur-md border-b border-gray-700 z-50">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
