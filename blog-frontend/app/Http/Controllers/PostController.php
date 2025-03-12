@@ -31,23 +31,4 @@ class PostController extends Controller
     
         return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalPosts', 'categories', 'tags'));
     }
-    
-    public function show($id, Request $request)
-    {
-        $response = Http::withHeaders(['Authorization'=>session('api_token')])->get(env('API_URL') . '/api/posts/'. $id, $request->all());
-
-        if ($response->successful()) {
-            $post = $response->json()['data'];
-            return view('post.show', compact('post'));
-        }
-    
-        return redirect()->route('post.index')->with('error', 'Ürün bilgisi alınamadı.');
-    }
-    
-
-    
-
-
-    
-    
 }

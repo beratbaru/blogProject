@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ApiRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -11,10 +12,7 @@ class CommentController extends Controller
     
     public function store(Request $request, $postId)
     {
-        $response = Http::withHeaders([
-            'Authorization' => session('api_token'),
-            'Accept' => 'application/json'
-        ])->post(env('API_URL') . "/api/posts/{$postId}/comments", $request->all());
+        $response = ApiRequest::request('post', "/api/posts/{$postId}/comments", $request->all());
     
         if ($response->successful()) {
             return redirect()->back()->with('success', 'Yorumunuz incelemeye gönderildi!');
@@ -22,13 +20,11 @@ class CommentController extends Controller
     
         return back()->withErrors($response->json('errors', ['Bilinmeyen bir hata oluştu.']))->withInput();
     }
-    public function show($postId)
+    public function show(Request $request, $postId)
     {
-        $responsePost = Http::withHeaders(['Authorization' => session('api_token')])
-            ->get(env('API_URL') . "/api/posts/{$postId}");
+        $responsePost = ApiRequest::request('get', "/api/posts/{$postId}");
     
-        $responseComments = Http::withHeaders(['Authorization' => session('api_token')])
-            ->get(env('API_URL') . "/api/posts/{$postId}/comments");
+        $responseComments = ApiRequest::request('get', "/api/posts/{$postId}/comments", $request->all());
 
     
         $post = $responsePost->json()['data'] ?? null;

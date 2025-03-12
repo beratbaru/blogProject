@@ -31,10 +31,10 @@ class CommentController extends Controller
             'status' => '0',
         ]);
         
-        $admin = User::role('super-admin')->pluck('email')->toArray();//Spatie HasRoles (https://spatie.be/docs/laravel-permission/v6/basic-usage/basic-usage) kullanarak süper admin rolü olan kullanıcıları bir değişkene atıyorum
+        $admin = User::role('super-admin')->pluck('email')->toArray();//Spatie HasRoles (https://spatie.be/docs/laravel-permission/v6/basic-usage/basic-usage) kullanarak süper admin rolü olan kullanıcıların maillerini bir değişkene atıyorum
         \Illuminate\Support\Facades\Mail::to($admin)->queue(
             new CommentPosted($comment)
-            );
+        );
         
         return response()->json($comment, 201);
     }

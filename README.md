@@ -95,7 +95,4 @@ Blog Post Creation with Tagging
 
 Fully Dockerized Setup
 
-<!--
--Yorum atınca mailin gelip gelmediğini mailtrap kullanarak kontrol ettim.
-
-\Artisan::call('posts:update-status'); -->
+<!--\Artisan::call('posts:update-status'); -->
