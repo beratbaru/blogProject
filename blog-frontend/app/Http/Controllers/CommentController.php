@@ -26,10 +26,9 @@ class CommentController extends Controller
     
         $responseComments = ApiRequest::request('get', "/api/posts/{$postId}/comments", $request->all());
 
-    
+
         $post = $responsePost->json()['data'] ?? null;
-        $comments = $responseComments->successful() ? $responseComments->json() : [];
-        
+        $comments = $responseComments->successful() ? $responseComments->json('data', []) : [];
         return view('post.show', compact('post', 'comments', 'postId'));
     }
     

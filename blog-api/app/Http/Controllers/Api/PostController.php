@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Responses\ApiResponse;
 class PostController extends Controller
 {
 public function index(Request $request)
@@ -29,9 +29,8 @@ public function index(Request $request)
 
     $posts = $query->paginate(6);
 
-    return response()->json([
-        'message' => 'posts fetched successfully',
-        'data' => $posts->items(),
+    return ApiResponse::success([
+        'data' => $posts,
         'links' => [
             'previous' => $posts->previousPageUrl(),
             'next' => $posts->nextPageUrl(),

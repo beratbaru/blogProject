@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use App\Mail\CommentPosted;
 use App\Models\User;
 use App\Http\Requests\StoreCommentRequest;
+use App\Http\Responses\ApiResponse;
 class CommentController extends Controller
 {
     public function index(Post $post)
     {
         $comments = $post->comments()->where('status','1')->with('user')->get();
 
-        return response()->json($comments);
+        return ApiResponse::success($comments,'Data retrieved successfully');
         
     }
 
@@ -25,7 +26,7 @@ class CommentController extends Controller
 
 
         $comment = Comment::create([
-            'user_id' => auth()->id(),  
+            'user_id' => auth()->id(),
             'post_id' => $post->id,
             'content' => $validated['content'],
             'status' => '0',
@@ -36,6 +37,6 @@ class CommentController extends Controller
             new CommentPosted($comment)
         );
         
-        return response()->json($comment, 201);
+        return ApiResponse::success($comment, 201);
     }
 }

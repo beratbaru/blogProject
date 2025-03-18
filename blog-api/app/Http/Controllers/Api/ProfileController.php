@@ -9,11 +9,6 @@ use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Support\Facades\Validator;
 class ProfileController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
     public function update(UpdateProfileRequest $request)
     {
         $profile = $request->user();
@@ -35,6 +30,4 @@ class ProfileController extends Controller
             'data' => $profile,
         ], 200);
     }
-    
-
 }

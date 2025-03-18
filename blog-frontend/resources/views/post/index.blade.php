@@ -111,7 +111,7 @@
         @endif
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse ($posts as $post)
+            @forelse ($posts['data']['data'] as $post)
             <article class="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
                 <div class="relative h-48 overflow-hidden">
                     <a href="{{ route('post.show', $post['id']) }}">
