@@ -51,9 +51,6 @@ public function index(Request $request)
             return response()->json(['message' => 'post not found'], 404);
         }
     
-        return response()->json([
-            'message' => 'post fetched successfully',
-            'data' => $post,
-        ]);
+        return ApiResponse::success($post, 201);
     }
 }

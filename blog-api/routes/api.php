@@ -9,9 +9,6 @@ use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\PolicyController;
 use App\Http\Controllers\TagController;
 use \App\Http\Controllers\Api\CategoryController;
-Route::get('/test', function(){
-    return view('mail.comment-posted');
-});
 
 Route::get('/policies', [PolicyController::class, 'getPolicies']);
 Route::get('/tags', [TagController::class, 'index']);
@@ -24,22 +21,16 @@ Route::middleware(['auth:sanctum'])->group(function (){
 
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::apiResource('posts', PostController::class);
-    Route::get('/posts', [PostController::class, 'index']); 
     Route::get('/posts/{id}', [PostController::class, 'show']); 
-    Route::delete('posts/{id}', [PostController::class, 'destroy']);
     Route::put('posts/{id}', [PostController::class, 'update']);
     Route::get('/posts', [PostController::class, 'index']);
-    Route::post('/posts', [PostController::class, 'store']);
 
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::put('/profile', [ProfileController::class, 'update']);
     
     Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
     Route::get('/posts/{post}/comments', [CommentController::class, 'index']);
-
-    Route::patch('/comments/{comment}/status', [CommentController::class, 'updateStatus'])
-        ->middleware('can:update,comment'); 
-    });
+});
 
 
 
