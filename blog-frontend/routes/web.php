@@ -15,8 +15,7 @@ Route::resource('post', PostController::class);
 Route::get('/posts/{postId}', [CommentController::class, 'show'])->name('post.show');
 Route::post('/posts/{postId}/comments', [CommentController::class, 'store'])->name('comments.store');
 
-Route::get('/policy/kvkk', [PolicyController::class, 'showKvkkPolicy'])->name('policy.kvkk');
-Route::get('/policy/policy', [PolicyController::class, 'showSecurityPolicy'])->name('policy.policy');
+Route::get('/policy/{type}', [PolicyController::class, 'getPolicies'])->name('policy');
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 

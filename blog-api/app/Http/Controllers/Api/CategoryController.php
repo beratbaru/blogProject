@@ -11,7 +11,6 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-
         return ApiResponse::success($categories, 201);
     }
 }

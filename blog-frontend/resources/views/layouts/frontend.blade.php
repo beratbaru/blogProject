@@ -21,11 +21,12 @@
     <footer class="bg-gray-800 text-white py-6 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="flex justify-center space-x-8">
-                <a href="{{ route('policy.kvkk') }}" 
+                <a href="{{ route('policy', ['type' => 'kvkk']) }}" 
+ 
                    class="text-gray-400 hover:text-white transition-colors">
                     KVKK Politikası
                 </a>
-                <a href="{{ route('policy.policy') }}" 
+                <a href="{{ route('policy', ['type' => 'security']) }}" 
                    class="text-gray-400 hover:text-white transition-colors">
                     Güvenlik Politikası
                 </a>

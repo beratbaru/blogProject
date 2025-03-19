@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\PolicyController;
 use App\Http\Controllers\TagController;
 use \App\Http\Controllers\Api\CategoryController;
 
-Route::get('/policies', [PolicyController::class, 'getPolicies']);
+Route::get('/policies/{type}', [PolicyController::class, 'getPolicies']);
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('/categories', [CategoryController::class, 'index']);
 
@@ -22,7 +22,6 @@ Route::middleware(['auth:sanctum'])->group(function (){
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::apiResource('posts', PostController::class);
     Route::get('/posts/{id}', [PostController::class, 'show']); 
-    Route::put('posts/{id}', [PostController::class, 'update']);
     Route::get('/posts', [PostController::class, 'index']);
 
     Route::get('/profile', [AuthController::class, 'profile']);
