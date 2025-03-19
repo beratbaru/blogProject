@@ -17,7 +17,7 @@ class PolicyResource extends Resource
 {
     protected static ?string $model = Policy::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-c-document-text';
 
     public static function form(Form $form): Form
     {
