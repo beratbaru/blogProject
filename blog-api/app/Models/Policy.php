@@ -9,5 +9,5 @@ class Policy extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['kvkk_policy', 'security_policy'];
+    protected $fillable = ['title', 'content'];
 }

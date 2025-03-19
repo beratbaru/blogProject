@@ -9,21 +9,17 @@ class PolicyController extends Controller
 {
     public function getPolicies($type)
     {
-        $policy = Policy::first();
+        $policy = Policy::where('title', $type)->first();
     
         if (!$policy) {
-            return response()->json(['error' => 'Policies not found.'], 404);
+            return response()->json(['error' => 'Policy not found.'], 404);
         }
     
-        if ($type === 'kvkk') {
-            return response()->json(['kvkk_policy' => $policy->kvkk_policy]);
-        }
-    
-        if ($type === 'security') {
-            return response()->json(['security_policy' => $policy->security_policy]);
-        }
-    
-        return response()->json(['error' => 'Invalid policy type.'], 400);
+        return response()->json([
+            'title' => $policy->title,
+            'content' => $policy->content,
+        ]);
     }
+    
 }
 

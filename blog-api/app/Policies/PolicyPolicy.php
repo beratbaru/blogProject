@@ -29,7 +29,7 @@ class PolicyPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasRole('super-admin');
     }
 
     /**
@@ -37,7 +37,7 @@ class PolicyPolicy
      */
     public function update(User $user, Policy $policy): bool
     {
-        return false;
+        return $user->hasRole('super-admin');
     }
 
     /**
@@ -45,7 +45,7 @@ class PolicyPolicy
      */
     public function delete(User $user, Policy $policy): bool
     {
-        return false;
+        return $user->hasRole('super-admin');
     }
 
     /**
@@ -53,7 +53,7 @@ class PolicyPolicy
      */
     public function restore(User $user, Policy $policy): bool
     {
-        return false;
+        return $user->hasRole('super-admin');
     }
 
     /**
@@ -61,6 +61,6 @@ class PolicyPolicy
      */
     public function forceDelete(User $user, Policy $policy): bool
     {
-        return false;
+        return $user->hasRole('super-admin');
     }
 }

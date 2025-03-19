@@ -12,50 +12,49 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\TextArea;
-use Filament\Forms\Components\MarkdownEditor;
-use Tables\Columns\TextColumn;
+
 class PolicyResource extends Resource
 {
     protected static ?string $model = Policy::class;
 
-    protected static ?string $navigationIcon = 'heroicon-c-document-text';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextArea::make('kvkk_policy')
-                    ->label('KVKK Policy')
-                    ->placeholder('Enter KVKK policy content here...')
-                    ->required(),
-                MarkdownEditor::make('security_policy')
-                    ->label('Security Policy')
-                    ->placeholder('Enter security policy content here...')
-                    ->required(),
+                Forms\Components\TextInput::make('title')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextArea::make('content') 
+                    ->required()
+                    ->columnSpanFull(),
             ]);
     }
+    
 
     public static function table(Table $table): Table
     {
+        
         return $table
             ->columns([
-                // You can add columns like 'kvkk_policy' and 'security_policy' for easy reference
-                Tables\Columns\TextColumn::make('kvkk_policy')->limit(50),
-                Tables\Columns\TextColumn::make('security_policy')->limit(50),
-            ])
-            ->filters([
-                //
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('content')
+                    ->limit(50), 
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
+    
 
     public static function getRelations(): array
     {
