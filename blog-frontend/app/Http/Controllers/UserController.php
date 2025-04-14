@@ -11,7 +11,7 @@ class UserController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->post(env('API_URL') . '/api/register', [
+        ])->post(config('services.api.url') . '/api/register', [
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
@@ -30,7 +30,7 @@ class UserController extends Controller
 
     public function logout()
     {
-        $response = Http::withToken(session('api_token'))->post(env('API_URL').'/api/logout');
+        $response = Http::withToken(session('api_token'))->post(config('services.api.url').'/api/logout');
     
         session()->forget(['api_token', 'user_name', 'user']);
     
@@ -45,7 +45,7 @@ class UserController extends Controller
 
     public function show(){
         $response = Http::withHeaders(['Authorization' => session('api_token')])
-        ->get(env('API_URL') . '/api/profile', request()->query());
+        ->get(config('services.api.url') . '/api/profile', request()->query());
         $profile = $response->json()['data'];
         if ($response->successful()){
             $user = session('user');
@@ -60,7 +60,7 @@ class UserController extends Controller
         $response = Http::withHeaders([
             'Authorization' => session('api_token'),
             'Accept' => 'application/json',
-        ])->put(env('API_URL') . "/api/profile", $request->all());
+        ])->put(config('services.api.url') . "/api/profile", $request->all());
     
         if ($response->successful()) {
             return redirect()->back()->with('success', 'Profiliniz başarıyla güncellendi!');
@@ -81,7 +81,7 @@ class UserController extends Controller
             'password' => 'string',
         ]);
     
-        $response = Http::post(env('API_URL').'/api/login', [
+        $response = Http::post(config('services.api.url').'/api/login', [
             'email' => $request->email,
             'password' => $request->password,
         ]);

@@ -5,8 +5,8 @@ To Do List:
 3. request validation kullanılacak. //ok
 4. 'berat123@gmail.com' bu tarz statik şeyler olmamalı. env üzerinden config'den alınmalı. //done using packages
 5. policies tek key ile tek satır policy gelmeli. //ok-->
-<!-- 6. api'deki response yapısının düzenlenmesi gerekiyor. bunun için bir response class'ı oluşturulabilir. //ok,may check later though-->
-7. kategori verileri db'den fe'den direk alınıyor.
+<!-- 6. api'deki response yapısının düzenlenmesi gerekiyor. bunun için bir response class'ı oluşturulabilir. //ok, might check later though-->
+7. kategori verileri db'den fe'den direk alınıyor. ???
 <!--8. 
 Http::withHeaders(['Authorization' => session('api_token')])
 ->post(env('API_URL') . "/api/posts/{$postId}/comments", $request->all());

@@ -18,7 +18,6 @@
     </div>
 </div>
 @else
-    <!-- Header -->
 <header class="sticky top-0 bg-gray-800 backdrop-blur-md border-b border-gray-700 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -43,7 +42,6 @@
                 </button>
             </div>
 
-            <!-- Mobile Menu -->
         <div id="mobileMenu" class="md:hidden hidden mt-4">
             <a href="{{ url('profile') }}" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">
                 <i class="fas fa-user-circle text-xl mr-2"></i>

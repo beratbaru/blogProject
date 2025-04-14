@@ -15,14 +15,6 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
-        ], [
-            'email.required' => 'E-posta alanı boş bırakılamaz.',
-            'email.string' => 'E-posta yalnızca metin içermelidir.',
-            'email.email' => 'Geçerli bir e-posta adresi giriniz.',
-            'email.max' => 'E-posta en fazla 255 karakter olabilir.',
-            'password.required' => 'Şifre alanı boş bırakılamaz.',
-            'password.string' => 'Şifre yalnızca metin içermelidir.',
-            'password.min' => 'Şifre en az 6 karakter olmalıdır.',
         ]);
         $user = User::where('email', $request->email)->first();
         if (!$user) {
@@ -51,8 +43,6 @@ class AuthController extends Controller
         $validated = $request->validated();
     
         $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             
         ]);
@@ -68,8 +58,6 @@ class AuthController extends Controller
         ], 500);
     }
     
-    
-
     public function logout(Request $request)
     {
         $user = $request->user();

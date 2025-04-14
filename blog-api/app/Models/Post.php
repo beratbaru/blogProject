@@ -26,7 +26,6 @@ class Post extends Model
         'deactivationDate' => 'datetime',
     ];
 
-    // Relationships
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -45,7 +44,7 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
-    // Automatic slug generation
+
     protected static function boot()
     {
         parent::boot();

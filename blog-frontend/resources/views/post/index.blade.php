@@ -45,7 +45,6 @@
                 </button>
             </div>
 
-            <!-- Mobile Menu -->
             <div id="mobileMenu" class="md:hidden hidden mt-4 bg-gray-800 rounded-lg p-4">
                 <a href="{{ url('profile') }}" class="block py-2 text-gray-300 hover:text-blue-400 transition-colors">
                     <i class="fas fa-user-circle text-xl mr-2"></i>
@@ -61,7 +60,6 @@
             </div>
         </nav>
 
-            <!-- Mobile Menu -->
             <div id="mobileMenu" class="md:hidden hidden mt-4 bg-gray-800 rounded-lg p-4">
                 <a href="{{ url('profile') }}" class="block py-2 text-gray-300 hover:text-blue-400 transition-colors">
                     <i class="fas fa-user-circle text-xl mr-2"></i>

@@ -29,7 +29,7 @@ class Comment extends Model
     
     public function scopeActive($query)
     {
-        return $query->where('status', '1'); // Only active comments
+        return $query->where('status', '1');
     }
 
 }
