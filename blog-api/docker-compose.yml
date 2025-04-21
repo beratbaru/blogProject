@@ -12,11 +12,11 @@ services:
       - DB_DATABASE=laravel
       - DB_USERNAME=laravel_user
       - DB_PASSWORD=password
-      - QUEUE_CONNECTION=redis  # Use Redis for queues
-      - REDIS_HOST=redis  # Redis hostname
+      - QUEUE_CONNECTION=redis  
+      - REDIS_HOST=redis  
     depends_on:
       - mysql
-      - redis  # Add Redis as a dependency
+      - redis  
     networks:
       - kle_network
 
@@ -61,22 +61,22 @@ services:
     image: nginx:latest
     container_name: api_nginx
     ports:
-      - "8000:80"  # Backend accessible on port 8000
+      - "8000:80" 
     volumes:
       - .:/var/www/html
-      - ./nginx.conf:/etc/nginx/nginx.conf  # Nginx config file
+      - ./nginx.conf:/etc/nginx/nginx.conf 
     depends_on:
       - api_app
     networks:
       kle_network:
         aliases:
-          - api_nginx  # Nginx container accessible with the alias 'api_nginx'
+          - api_nginx  
 
 volumes:
   dbdata:
     driver: local
   redis_data:
-    driver: local  # Volume to persist Redis data
+    driver: local  
 
 networks:
   kle_network:
