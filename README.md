@@ -95,4 +95,4 @@ Blog Post Creation with Tagging
 
 Fully Dockerized Setup
 
-<!--\Artisan::call('posts:update-status'); -->
+<!--\Artisan::call('posts:update-status'); (run in tinker to test post scheduling after publishing a post from the panel.) -->

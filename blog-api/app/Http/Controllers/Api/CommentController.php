@@ -10,13 +10,15 @@ use App\Mail\CommentPosted;
 use App\Models\User;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Responses\ApiResponse;
+use Illuminate\Support\Facades\Auth;
+
 class CommentController extends Controller
 {
     public function index(Post $post)
     {
         $comments = $post->comments()->where('status','1')->with('user')->get();
 
-        return ApiResponse::success($comments,'Data retrieved successfully');
+        return ApiResponse::success($comments,'Comments retrieved successfully');
         
     }
 
@@ -26,7 +28,7 @@ class CommentController extends Controller
 
 
         $comment = Comment::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::user()->id,
             'post_id' => $post->id,
             'content' => $validated['content'],
             'status' => '0',
