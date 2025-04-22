@@ -81,6 +81,8 @@ To check running containers:
 
 docker ps
 
+Don't forget to run "npm run dev" in the terminal(frontend) for the design to load properly.
+
 I tested mails using mailtrap and queues using horizon.
 
 🎯 Features
