@@ -4,7 +4,7 @@
 @if(!session('api_token'))
 <div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center">
     <div class="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
-        <h3 class="text-2xl font-bold text-white mb-6">Verileri görmek için giriş yapınız.</h3>
+        <h3 class="text-2xl font-bold text-white mb-6">Lütfen önce giriş yapınız.</h3>
         <div class="flex justify-center gap-4">
             <a href="{{ route('register') }}" 
                class="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105">
@@ -18,43 +18,43 @@
     </div>
 </div>
 @else
-<header class="sticky top-0 bg-gray-800 backdrop-blur-md border-b border-gray-700 z-50">
+    <header class="sticky top-0 bg-gray-800 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-50 transition-colors duration-300">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <a href="#" class="text-2xl font-bold text-blue-400">Blog</a>
+                <a href="#" class="text-2xl font-light text-amber-600 dark:text-amber-400">Blog</a>
                 
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="{{ url('profile') }}" class="flex items-center text-gray-300 hover:text-blue-400 transition-colors">
+                    <a href="{{ url('profile') }}" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
                         <i class="fas fa-user-circle text-xl mr-2"></i>
                         Profil
                     </a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="flex items-center text-gray-300 hover:text-red-400 transition-colors">
+                        <button type="submit" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors">
                             <i class="fas fa-sign-out-alt text-xl mr-2"></i>
                             Çıkış Yap
                         </button>
                     </form>
                 </div>
 
-                <button id="menuButton" class="md:hidden text-gray-300">
+                <button id="menuButton" class="md:hidden text-gray-700 dark:text-gray-300">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
 
-        <div id="mobileMenu" class="md:hidden hidden mt-4">
-            <a href="{{ url('profile') }}" class="block py-2 text-gray-600 hover:text-blue-600 transition-colors">
-                <i class="fas fa-user-circle text-xl mr-2"></i>
-                Profil
-            </a>
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="block py-2 text-gray-600 hover:text-red-600 transition-colors">
-                    <i class="fas fa-sign-out-alt text-xl mr-2"></i>
-                    Çıkış Yap
-                </button>
-            </form>
-        </div>
+            <div id="mobileMenu" class="md:hidden hidden mt-4 bg-white dark:bg-gray-700 rounded-lg p-4 shadow-lg border border-gray-200 dark:border-gray-600">
+                <a href="{{ url('profile') }}" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+                    <i class="fas fa-user-circle text-xl mr-2"></i>
+                    Profil
+                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors">
+                        <i class="fas fa-sign-out-alt text-xl mr-2"></i>
+                        Çıkış Yap
+                    </button>
+                </form>
+            </div>
         </nav>
     </header>
 

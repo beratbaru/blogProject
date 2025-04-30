@@ -4,7 +4,7 @@
 @if(!session('api_token'))
     <div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center transition-colors duration-300">
         <div class="text-center bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-gray-700">
-            <h3 class="text-2xl font-light text-gray-800 dark:text-gray-100 mb-6">Verileri görmek için giriş yapınız.</h3>
+            <h3 class="text-2xl font-light text-gray-800 dark:text-gray-100 mb-6">Lütfen önce giriş yapınız.</h3>
             <div class="flex justify-center gap-4">
                 <a href="{{ route('register') }}" 
                 class="px-6 py-2 bg-gradient-to-r from-amber-600 to-amber-500 text-white rounded-lg hover:from-amber-700 hover:to-amber-600 transition-all shadow-md hover:shadow-lg">
