@@ -3,7 +3,7 @@
 @section('content')
 <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
     <div class="bg-white dark:bg-gray-800/95 rounded-xl shadow-lg p-8 w-full max-w-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
-        <form action="{{ route('register') }}" method="POST" class="space-y-6">
+        <form action="{{ route('register.submit') }}" method="POST" class="space-y-6">
             @csrf
             <div class="text-center">
                 <h3 class="text-3xl font-light text-gray-800 dark:text-gray-100 mb-2">Hesap Oluştur</h3>
@@ -24,7 +24,7 @@
                            name="name" 
                            id="name" 
                            
-                           placeholder="Taha Karakaya" 
+                           placeholder="Taha" 
                            value="{{ old('name') }}" 
                            class="w-full px-4 py-3 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all">
                 </div>
@@ -35,7 +35,7 @@
                            name="email" 
                            id="email" 
                            
-                           placeholder="taha@email.com" 
+                           placeholder="taha@gmail.com" 
                            value="{{ old('email') }}" 
                            class="w-full px-4 py-3 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all">
                 </div>
