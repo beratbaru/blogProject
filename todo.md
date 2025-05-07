@@ -33,7 +33,7 @@ AuthControllerde Loginde Validationu Requests kullanabilirsin.
 
 Logout kodu çalışmıyor. Frontendde logout yapıyorum ama token silinmiyor. Postmande denedim hata aldım. "Call to undefined method App\\Models\\User::token()",
 
-StoreCommentRequest contente required lazım
+<!-- StoreCommentRequest contente required lazım -->
 
 
 Frontend:

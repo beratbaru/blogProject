@@ -20,7 +20,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::middleware(['auth:sanctum'])->group(function (){
 
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::apiResource('posts', PostController::class);
+
     Route::get('/posts/{id}', [PostController::class, 'show']); 
     Route::get('/posts', [PostController::class, 'index']);
 

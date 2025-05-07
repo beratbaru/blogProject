@@ -23,14 +23,15 @@ class StoreCommentRequest extends FormRequest
     {
         return [
             //
-            'content' => 'string|min:3|max:500',
+            'content' => 'required|string|min:3|max:500',
         ];
     }
     public function messages(): array
     {
         return [
+            'content.required' => 'İçerik kısmı boş bırakılamaz.',
             'content.min' => 'Yorumunuz çok kısa.',
-            'content.max' => 'Yorumunuz çok uzun.',
+            'content.max' => 'Yorumunuz çok uzun.'
 
         ];
     }
