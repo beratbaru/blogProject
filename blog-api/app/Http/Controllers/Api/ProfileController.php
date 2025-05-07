@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Responses\ApiResponse;
 use Illuminate\Support\Facades\Validator;
 class ProfileController extends Controller
 {
@@ -25,9 +26,6 @@ class ProfileController extends Controller
     
         $profile->update($validated);
     
-        return response()->json([
-            'message' => 'Profiliniz başarıyla güncellendi.',
-            'data' => $profile,
-        ], 200);
+        return ApiResponse::success($profile, 'Profile updated successfully.', 200);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Responses\ApiResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,22 +19,20 @@ class AuthController extends Controller
         ]);
         $user = User::where('email', $request->email)->first();
         if (!$user) {
-            return response()->json([
-                'message' => 'Kullanıcı bulunamadı.'
-            ], 404);
+            return ApiResponse::error('User not found.',404);
         }
         if (!Hash::check($request->password, $user->password)) {
-            return response()->json([
-                'message' => 'Şifre eşleşmiyor.'
-            ], 401);
+            return ApiResponse::error('Wrong password.', 401);
         }
+
         $token = $user->createToken($user->name . '-Auth-Token')->plainTextToken;
-        return response()->json([
-            'message' => 'Giriş başarılı.',
-            'token_type' => 'Bearer',
+
+        return ApiResponse::success([
+            'login' => 'succesful.',
             'token' => 'Bearer ' . $token,
             'user' => $user
-        ], 200);
+        ],200);
+
     }
     
     
@@ -50,39 +49,34 @@ class AuthController extends Controller
         ]);
     
         if ($user) {
-            return response()->json([
-                'message' => 'Kayıt başarılı.',
-            ], 201);
+            return ApiResponse::success([
+                'name' => $user['name'],
+                'registration' => 'succesful.'
+            ],201);
         }
     
-        return response()->json([
-            'message' => 'Bir şeyler ters gitti, lütfen tekrar deneyin.',
-        ], 500);
+        return ApiResponse::error('Something went wrong.', 500);
     }
     
     public function logout(Request $request)
     {
         $user = $request->user();
-        
-        if ($user && $user->token()) {
-            $user->token()->revoke();
-            return response()->json(['message' => 'Logout successful'], 200);
+    
+        if ($user && $user->currentAccessToken()) {
+            $user->currentAccessToken()->delete();
+            return ApiResponse::success([], 'Logout successful');
         }
-        return response()->json(['message' => 'Token invalid or user not authenticated'], 401);
+    
+        return ApiResponse::error('Invalid token, please log in first', 401);
     }
     
 
     public function profile(Request $request)
     {
         if ($request->user()) {
-            return response()->json([
-                'message' => 'Profile fetched successfully.',
-                'data' => $request->user(),
-            ], 200);
+            return ApiResponse::success($request->user(),200);
         }
 
-        return response()->json([
-            'message' => 'User not authenticated.',
-        ], 401);
+        return ApiResponse::error('Unauthenticated.', 401);
     }
 }
