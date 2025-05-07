@@ -12,15 +12,17 @@ class PolicyController extends Controller
         $response = Http::withHeaders(['Authorization' => session('api_token')])
             ->get(env('API_URL') . "/api/policies/{$type}"); 
     
+        $responseData = $response->json();
+
         if ($response->successful()) {
-            $policy = $response->json();
+            $policy = $responseData['data'];
 
             return view("policy.show", [
                 'title' => $policy['title'] ?? 'Unknown Policy',
                 'content' => $policy['content'] ?? '',
             ]);
         }
-        dd($response->json());
+
         return view("policy.show")->with('error', 'Could not fetch the policy.');
     }
 }

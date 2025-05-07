@@ -30,10 +30,7 @@ Route::get('/register', function () {
 
 Route::post('/register', [UserController::class, 'register'])->name('register.submit');
 
-Route::post('/logout', function () {
-    session()->forget('api_token');
-    return redirect('/login')->with('success', 'Başarıyla çıkış yaptınız.');
-})->name('logout');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('profile', [UserController::class, 'show']);
 Route::put('profile', [UserController::class, 'update'])->name('profile.update');

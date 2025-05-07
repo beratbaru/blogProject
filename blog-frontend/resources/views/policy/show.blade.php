@@ -46,14 +46,14 @@
     <div class="container mx-auto p-6">
         <div class="policy-section">
 
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ $title }}</h2>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ $title ?? 'Böyle bir politika mevcut değil'}}</h2>
         
         @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @else
 
             <div class="policy-content bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                <p class="text-gray-700 leading-relaxed">{{ $content }}</p>
+                <p class="text-gray-700 leading-relaxed">{{ $content ?? 'Lütfen geçerli bir urlye geçiş yapınız.'}}</p>
             </div>
         </div>
         @endif

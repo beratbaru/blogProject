@@ -37,7 +37,7 @@ class UserController extends Controller
         if ($response->successful()) {
             return redirect()->route('login')->with('success', 'Başarıyla çıkış yapıldı.');
         }
-    
+        
         return redirect()->route('login')->withErrors(['logout' => 'Çıkış sırasında bir hata oluştu.']);
     }
     

@@ -44,18 +44,18 @@
     <div class="container mx-auto p-6">
         <div class="policy-section">
 
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4"><?php echo e($title); ?></h2>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4"><?php echo e($title ?? 'Böyle bir politika mevcut değil'); ?></h2>
         
         <?php if(session('error')): ?>
             <div class="alert alert-danger"><?php echo e(session('error')); ?></div>
         <?php else: ?>
 
             <div class="policy-content bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                <p class="text-gray-700 leading-relaxed"><?php echo e($content); ?></p>
+                <p class="text-gray-700 leading-relaxed"><?php echo e($content ?? 'Lütfen geçerli bir urlye geçiş yapınız.'); ?></p>
             </div>
         </div>
         <?php endif; ?>
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.frontend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/resources/views/policy/show.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.frontend', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /var/www/html/resources/views/policy/show.blade.php ENDPATH**/ ?>
