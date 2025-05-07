@@ -15,7 +15,7 @@ class ProfileController extends Controller
         $profile = $request->user();
     
         if (!$profile) {
-            return response()->json(['message' => 'Kullanıcı bulunamadı.'], 404);
+            return response()->json(['message' => 'User not found.'], 404);
         }
     
         $validated = $request->validated();

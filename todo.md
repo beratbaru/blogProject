@@ -26,17 +26,17 @@ projeyi kurarken storage klasöründe framework klasörünü silmişsin bundan k
 
 projeyi kurduktan sonra migrate yaptım ama sessions tablosunu bulamadı silinmiş. php artisan make:session-table ile çözdüm istersen bunu readmede belirterek veyada direkt migration dosyasını ekleyerek çözebilirsin.
 
- bir önceki revizelerdeki 6. maddedeki response yapısı hepsine uyarlanmamış. AuthControllerde, PolicyControllerde, ProfileControllerde. -->
+ bir önceki revizelerdeki 6. maddedeki response yapısı hepsine uyarlanmamış. AuthControllerde, PolicyControllerde, ProfileControllerde. 
 
 AuthControllerde Loginde Validationu Requests kullanabilirsin.
 
 
-<!-- Logout kodu çalışmıyor. Frontendde logout yapıyorum ama token silinmiyor. Postmande denedim hata aldım. "Call to undefined method App\\Models\\User::token()", -->
+ Logout kodu çalışmıyor. Frontendde logout yapıyorum ama token silinmiyor. Postmande denedim hata aldım. "Call to undefined method App\\Models\\User::token()", 
 
-<!-- StoreCommentRequest contente required lazım -->
+StoreCommentRequest contente required lazım -->
 
 
 Frontend:
 <!-- PolicyController dd kalmış. | Olmayan bir policies girince hata alıyorum. -->
 
-Frontend logoutunda mesela backende göre işlem yapsan daha iyi olabilir eğer ki backend logout başarılı tokeni sildim derse sessiondan silersin tokeni. Backend Logout çalışmıyor.
+Frontend logoutunda mesela backende göre işlem yapsan daha iyi olabilir eğer ki backend logout başarılı tokeni sildim derse sessiondan silersin tokeni. Backend Logout çalışmıyor. <!--gonna check later on again-->

@@ -40,8 +40,6 @@ class UserController extends Controller
         
         return redirect()->route('login')->withErrors(['logout' => 'Çıkış sırasında bir hata oluştu.']);
     }
-    
-
 
     public function show(){
         $response = Http::withHeaders(['Authorization' => session('api_token')])
