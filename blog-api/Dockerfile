@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer 
 
-WORKDIR /var/www 
+WORKDIR /var/www/html
 
 RUN docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl 
 RUN sed -i 's/listen = .*/listen = 9000/' /usr/local/etc/php-fpm.d/www.conf

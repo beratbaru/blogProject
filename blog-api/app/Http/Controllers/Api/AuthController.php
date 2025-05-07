@@ -50,7 +50,7 @@ class AuthController extends Controller
     
         if ($user) {
             return ApiResponse::success([
-                'name' => $user['name'],
+                'name' => $user,
                 'registration' => 'succesful.'
             ],201);
         }
