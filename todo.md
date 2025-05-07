@@ -39,4 +39,4 @@ StoreCommentRequest contente required lazım -->
 Frontend:
 <!-- PolicyController dd kalmış. | Olmayan bir policies girince hata alıyorum. -->
 
-Frontend logoutunda mesela backende göre işlem yapsan daha iyi olabilir eğer ki backend logout başarılı tokeni sildim derse sessiondan silersin tokeni. Backend Logout çalışmıyor. <!--gonna check later on again-->
+Frontend logoutunda mesela backende göre işlem yapsan daha iyi olabilir eğer ki backend logout başarılı tokeni sildim derse sessiondan silersin tokeni. Backend Logout çalışmıyor. <!--done I guess?-->

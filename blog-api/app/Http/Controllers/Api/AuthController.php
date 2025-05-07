@@ -19,7 +19,7 @@ class AuthController extends Controller
         $user = User::where('email', $validated['email'])->first();
     
         if (!$user || !Hash::check($validated['password'], $user->password)) {
-            return ApiResponse::error('These credentials do not match our data.', 401);
+            return ApiResponse::error('Yanlış mail veya şifre.', 401);
         }
     
         $token = $user->createToken($user->name . '-Auth-Token')->plainTextToken;
@@ -74,7 +74,7 @@ class AuthController extends Controller
     }
     
 
-    
+
     public function profile(Request $request)
     {
         if ($request->user()) {
