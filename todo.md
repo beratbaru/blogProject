@@ -18,15 +18,15 @@ Berat Baru:
 Proje: https://github.com/beratbaru/blogProject/
 Backend:
 
-database bilgileri docker-compose.yml üzerinde tanımlanmış bunları envden çekilebilir.
+<!--database bilgileri docker-compose.yml üzerinde tanımlanmış bunları envden çekilebilir.
 
-<!-- projeyi kurduktan sonra içine girince var/www den başlıyor dockerfilede workdiri düzeltebilirmisin? (Aynısı Frontenddede var)
+ projeyi kurduktan sonra içine girince var/www den başlıyor dockerfilede workdiri düzeltebilirmisin? (Aynısı Frontenddede var)
 
-projeyi kurarken storage klasöründe framework klasörünü silmişsin bundan kaynaklı projeyi kurarken hata aldım. (Aynısı Frontenddede var) -->
+projeyi kurarken storage klasöründe framework klasörünü silmişsin bundan kaynaklı projeyi kurarken hata aldım. (Aynısı Frontenddede var) 
 
 projeyi kurduktan sonra migrate yaptım ama sessions tablosunu bulamadı silinmiş. php artisan make:session-table ile çözdüm istersen bunu readmede belirterek veyada direkt migration dosyasını ekleyerek çözebilirsin.
 
-<!-- bir önceki revizelerdeki 6. maddedeki response yapısı hepsine uyarlanmamış. AuthControllerde, PolicyControllerde, ProfileControllerde. -->
+ bir önceki revizelerdeki 6. maddedeki response yapısı hepsine uyarlanmamış. AuthControllerde, PolicyControllerde, ProfileControllerde. -->
 
 AuthControllerde Loginde Validationu Requests kullanabilirsin.
 
