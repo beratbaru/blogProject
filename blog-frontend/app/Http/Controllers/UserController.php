@@ -85,11 +85,13 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ]);
-    
-        if ($response->successful() && isset($response['token'])) {
+        
+        $responseData = $response->json();
+
+        if ($response->successful() && isset($responseData['data']['token'])) {
             session([
-                'api_token' => $response['token'], 'user' => $response['user'],
-                
+                'api_token' => $responseData['data']['token'],
+                'user' => $responseData['data']['user'],
             ]);
     
             return redirect()->route('post.index')->with('success', 'Giriş başarılı!');
