@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    
     public function login(LoginRequest $request)
     {
         $validated = $request->validated();
@@ -25,18 +26,13 @@ class AuthController extends Controller
         $token = $user->createToken($user->name . '-Auth-Token')->plainTextToken;
     
         return ApiResponse::success([
-            'login' => 'successful.',
             'token' => 'Bearer ' . $token,
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-            ],
+            'user' => $user->only('id', 'name', 'email'),
+            'login' => 'successful.'
         ], 200);
     }
     
-    
-    
+
 
     public function register(RegisterRequest $request)
     {
@@ -64,7 +60,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = $request->user();
-    
+        
         if ($user && $user->currentAccessToken()) {
             $user->currentAccessToken()->delete();
             return ApiResponse::success([], 'Logout successful');
@@ -83,4 +79,5 @@ class AuthController extends Controller
 
         return ApiResponse::error('Unauthenticated.', 401);
     }
+
 }

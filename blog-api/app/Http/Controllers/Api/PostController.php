@@ -9,39 +9,39 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Responses\ApiResponse;
 class PostController extends Controller
 {
-public function index(Request $request)
-{
-    $query = Post::withCount('comments')
-                 ->with('tags')  
-                 ->orderByDesc('comments_count')
-                 ->latest()
-                 ->where('status', 'active');
+    public function index(Request $request)
+    {
+        $query = Post::withCount('comments')
+                    ->with('tags')  
+                    ->orderByDesc('comments_count')
+                    ->latest()
+                    ->where('status', 'active');
 
-    if ($request->filled('category_id')) {
-        $query->where('category_id', $request->category_id);
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        if ($request->filled('tag')) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('name', $request->tag);
+            });
+        }
+
+        $posts = $query->paginate(6);
+
+        return ApiResponse::success([
+            'data' => $posts,
+            'links' => [
+                'previous' => $posts->previousPageUrl(),
+                'next' => $posts->nextPageUrl(),
+            ],
+            'meta' => [
+                'current_page' => $posts->currentPage(),
+                'total_pages' => $posts->lastPage(),
+                'total_posts' => $posts->total(),
+            ],
+        ], 200);
     }
-
-    if ($request->filled('tag')) {
-        $query->whereHas('tags', function ($q) use ($request) {
-            $q->where('name', $request->tag);
-        });
-    }
-
-    $posts = $query->paginate(6);
-
-    return ApiResponse::success([
-        'data' => $posts,
-        'links' => [
-            'previous' => $posts->previousPageUrl(),
-            'next' => $posts->nextPageUrl(),
-        ],
-        'meta' => [
-            'current_page' => $posts->currentPage(),
-            'total_pages' => $posts->lastPage(),
-            'total_posts' => $posts->total(),
-        ],
-    ], 200);
-}
 
     public function show($id)
     {
