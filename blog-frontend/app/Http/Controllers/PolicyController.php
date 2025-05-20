@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ApiRequest;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
@@ -9,13 +10,10 @@ class PolicyController extends Controller
 {
     public function getPolicies($type)
     {
-        $response = Http::withHeaders(['Authorization' => session('api_token')])
-            ->get(env('API_URL') . "/api/policies/{$type}"); 
+        $response = ApiRequest::request('get', "/api/policies/{$type}"); 
     
-        $responseData = $response->json();
-
         if ($response->successful()) {
-            $policy = $responseData['data'];
+            $policy = $response->json('data');
 
             return view("policy.show", [
                 'title' => $policy['title'] ?? 'Unknown Policy',
