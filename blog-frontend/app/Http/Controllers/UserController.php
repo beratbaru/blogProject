@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ApiRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -9,14 +10,8 @@ class UserController extends Controller
 {
     public function register(Request $request)
     {
-        $response = Http::withHeaders([
-            'Accept' => 'application/json',
-        ])->post(config('services.api.url') . '/api/register', [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'password_confirmation' => $request->password_confirmation,
-        ]);
+        $response = ApiRequest::request('post', '/api/register', $request->all())
+;
         
         if ($response->successful()) {
             return redirect()->route('login')->with('success', 'Kayıt Başarılı!');
@@ -41,9 +36,10 @@ class UserController extends Controller
     }
 
     public function show(){
-        $response = Http::withHeaders(['Authorization' => session('api_token')])
-        ->get(config('services.api.url') . '/api/profile', request()->query());
+        $response = ApiRequest::request('get' , '/api/profile', request()->query());
         $profile = $response->json()['data'];
+
+        
         if ($response->successful()){
             $user = session('user');
             return view(
@@ -54,10 +50,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $response = Http::withHeaders([
-            'Authorization' => session('api_token'),
-            'Accept' => 'application/json',
-        ])->put(config('services.api.url') . "/api/profile", $request->all());
+        $response = ApiRequest::request('put' , '/api/profile' , $request->all());
     
         if ($response->successful()) {
             return redirect()->back()->with('success', 'Profiliniz başarıyla güncellendi!');
@@ -78,7 +71,7 @@ class UserController extends Controller
             'password' => 'string',
         ]);
     
-        $response = Http::post(config('services.api.url').'/api/login', [
+        $response = ApiRequest::request('post', '/api/login', [
             'email' => $request->email,
             'password' => $request->password,
         ]);

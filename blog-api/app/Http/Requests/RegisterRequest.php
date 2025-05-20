@@ -23,7 +23,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|min:3',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
             
@@ -35,6 +35,7 @@ class RegisterRequest extends FormRequest
             'name.required' => 'İsim alanı boş bırakılamaz.',
             'name.string' => 'İsim yalnızca metin içermelidir.',
             'name.max' => 'İsim en fazla 255 karakter olabilir.',
+            'name.min' => 'İsim en az 3 karakter olmalı.',
             'email.required' => 'E-posta alanı boş bırakılamaz.',
             'email.email' => 'Geçerli bir e-posta adresi giriniz.',
             'email.max' => 'E-posta en fazla 255 karakter olabilir.',
