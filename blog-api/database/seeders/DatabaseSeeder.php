@@ -34,5 +34,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PolicySeeder::class,
         ]);
+        //could use this to create posts
+        // \App\Models\Post::factory()->count(30)->create();
+
     }
 }

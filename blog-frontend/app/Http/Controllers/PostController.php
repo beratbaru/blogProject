@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ApiRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -22,12 +23,10 @@ class PostController extends Controller
         $totalPages = $meta['total_pages'] ?? 1;
         $totalPosts = $meta['total_posts'] ?? 0;
     
-        $categories = Http::withHeaders(['Authorization' => session('api_token')])
-            ->get(env('API_URL') . '/api/categories')->json('data', []) ?? [];
-    
-        $tags = Http::withHeaders(['Authorization' => session('api_token')])
-            ->get(env('API_URL') . '/api/tags')->json('data', []) ?? [];
-            
+        $categories = ApiRequest::request('get', "/api/categories")->json('data');
+
+        $tags = ApiRequest::request('get', '/api/tags')->json('data');
+
         return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalPosts', 'categories', 'tags'));
     }
 }
