@@ -47,7 +47,7 @@ PostControllerde paginationu tekrardan eklemişsin.
 
 <!-- Frontendde helper ile fonksiyon yazmışsın bunu bazı yerlerde kullanmışsın bazı yerlerde kullanmamışsın eğer ki fark yoksa heryerde kullanmak daha mantıklı değilmi? [apirequest] -->
 
-PostControllerde categoryleri tagları çekmişsin ve buna ihtiyacı olan her sayfada bunu yapmak zorunda kalacaksın onun yerine provider ile yaparmısın?
+<!-- PostControllerde categoryleri tagları çekmişsin ve buna ihtiyacı olan her sayfada bunu yapmak zorunda kalacaksın onun yerine provider ile yaparmısın? -->
 
 bende frontendde ve backendde bir işlem yaptığımda bir tarafta çıkış oluyordu. yani mesela backendde paneldeyim giriş yapmışım frontendde biryere girince işlem yapınca backend çıkış yapıyor. bu hatayı araştırabilirmisin?
 

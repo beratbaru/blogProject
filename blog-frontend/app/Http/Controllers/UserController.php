@@ -66,11 +66,6 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'email',
-            'password' => 'string',
-        ]);
-    
         $response = ApiRequest::request('post', '/api/login', [
             'email' => $request->email,
             'password' => $request->password,

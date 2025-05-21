@@ -22,11 +22,7 @@ class PostController extends Controller
         $currentPage = $meta['current_page'] ?? 1;
         $totalPages = $meta['total_pages'] ?? 1;
         $totalPosts = $meta['total_posts'] ?? 0;
-    
-        $categories = ApiRequest::request('get', "/api/categories")->json('data');
 
-        $tags = ApiRequest::request('get', '/api/tags')->json('data');
-
-        return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalPosts', 'categories', 'tags'));
+        return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalPosts'));
     }
 }
