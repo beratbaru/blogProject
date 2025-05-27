@@ -50,5 +50,4 @@ PostControllerde paginationu tekrardan eklemişsin. ???
  PostControllerde categoryleri tagları çekmişsin ve buna ihtiyacı olan her sayfada bunu yapmak zorunda kalacaksın onun yerine provider ile yaparmısın? -->
 
 bende frontendde ve backendde bir işlem yaptığımda bir tarafta çıkış oluyordu. yani mesela backendde paneldeyim giriş yapmışım frontendde biryere girince işlem yapınca backend çıkış yapıyor. bu hatayı araştırabilirmisin? -
--- panel ve frontend aynı session tokeni kullandığı için birinden giriş yapınca diğerinden atıyor. sanırım guardlarla oynama yaparak düzeltebilirim. haftaya deneyeceğim.
-
+-- panel ve frontend aynı session tokeni kullandığı için birinden giriş yapınca diğerinden atıyor. guardlarda oynama yapılarak düzeltilebilir

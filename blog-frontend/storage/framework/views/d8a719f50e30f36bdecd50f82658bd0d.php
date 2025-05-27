@@ -125,8 +125,7 @@
             </div>
             <?php endif; ?>
         </div>
-
-        <?php if(isset($paginationLinks) && isset($totalposts) && $totalposts > 6): ?>
+        <?php if(isset($paginationLinks) && isset($totalPosts) && $totalPosts > 6): ?>
         <div class="mt-12 flex justify-center space-x-4">
             <?php if($paginationLinks['previous']): ?>
             <a href="<?php echo e(url()->current() . '?' . parse_url($paginationLinks['previous'], PHP_URL_QUERY)); ?>" 
