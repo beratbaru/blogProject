@@ -16,8 +16,6 @@ class PostController extends Controller
             'Authorization' => session('api_token')
         ])->get(env('API_URL') . '/api/posts', $queryParams);
 
-        $responseData = $postResponse->json();
-            
         $posts = $postResponse->json('data', []) ?? [];
         $paginationLinks = $postResponse->json()['data']['links'] ?? [];
         $meta = $postResponse->json()['data']['meta'] ?? [];
