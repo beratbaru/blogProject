@@ -127,26 +127,27 @@
         </div>
         <?php if(isset($paginationLinks) && isset($totalPosts) && $totalPosts > 6): ?>
         <div class="mt-12 flex justify-center space-x-4">
-            <?php if($paginationLinks['previous']): ?>
-            <a href="<?php echo e(url()->current() . '?' . parse_url($paginationLinks['previous'], PHP_URL_QUERY)); ?>" 
-               class="px-5 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 flex items-center transition-colors">
+        <?php if(isset($paginationLinks[1]['url'])): ?>
+            <a href="<?php echo e(url()->current() . '?' . parse_url($paginationLinks[1]['url'], PHP_URL_QUERY)); ?>" 
+            class="px-5 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 flex items-center transition-colors">
                 <i class="fas fa-arrow-left mr-2"></i>
             </a>
-            <?php endif; ?>
+        <?php endif; ?>
 
-            <?php if(isset($currentPage) && isset($totalPages)): ?>
+        <?php if(isset($currentPage) && isset($totalPages)): ?>
             <div class="px-5 py-2 bg-amber-500 text-white rounded-lg">
                 <?php echo e($currentPage); ?> / <?php echo e($totalPages); ?>
 
             </div>
-            <?php endif; ?>
+        <?php endif; ?>
 
-            <?php if($paginationLinks['next']): ?>
-            <a href="<?php echo e(url()->current() . '?' . parse_url($paginationLinks['next'], PHP_URL_QUERY)); ?>" 
-               class="px-5 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 flex items-center transition-colors">
+        <?php if(isset($paginationLinks[2]['url'])): ?>
+            <a href="<?php echo e(url()->current() . '?' . parse_url($paginationLinks[2]['url'], PHP_URL_QUERY)); ?>" 
+            class="px-5 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 flex items-center transition-colors">
                 <i class="fas fa-arrow-right ml-2"></i>
             </a>
-            <?php endif; ?>
+        <?php endif; ?>
+
         </div>
         <?php endif; ?>
     </main>

@@ -15,13 +15,12 @@ class PostController extends Controller
         $postResponse = Http::withHeaders([
             'Authorization' => session('api_token')
         ])->get(env('API_URL') . '/api/posts', $queryParams);
-
+        
         $posts = $postResponse->json('data', []) ?? [];
-        $paginationLinks = $postResponse->json()['data']['links'] ?? [];
-        $meta = $postResponse->json()['data']['meta'] ?? [];
-        $currentPage = $meta['current_page'] ?? 1;
-        $totalPages = $meta['total_pages'] ?? 1;
-        $totalPosts = $meta['total_posts'] ?? 0;
+        $paginationLinks = $postResponse->json()['data']['data']['links'] ?? [];
+        $currentPage = $postResponse->json()['data']['data']['current_page'] ?? 1;
+        $totalPages = $postResponse->json()['data']['data']['last_page'] ?? 1;
+        $totalPosts = $postResponse->json()['data']['data']['total'] ?? 0;
 
 
         return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalPosts'));

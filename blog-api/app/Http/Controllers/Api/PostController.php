@@ -31,15 +31,6 @@ class PostController extends Controller
 
         return ApiResponse::success([
             'data' => $posts,
-            'links' => [
-                'previous' => $posts->previousPageUrl(),
-                'next' => $posts->nextPageUrl(),
-            ],
-            'meta' => [
-                'current_page' => $posts->currentPage(),
-                'total_pages' => $posts->lastPage(),
-                'total_posts' => $posts->total(),
-            ],
         ], 200);
     }
 
