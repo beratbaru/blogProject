@@ -16,13 +16,13 @@ class PostController extends Controller
             'Authorization' => session('api_token')
         ])->get(env('API_URL') . '/api/posts', $queryParams);
         
-        $meta = $postResponse->json()['data']['data'];
+        
 
         $posts = $postResponse->json('data', []) ?? [];
-        $paginationLinks = $meta['links'] ?? [];
-        $currentPage = $meta['current_page'] ?? 1;
-        $totalPages = $meta['last_page'] ?? 1;
-        $totalPosts = $meta['total'] ?? 0;
+        $paginationLinks = $postResponse->json()['data']['data']['links'] ?? [];
+        $currentPage = $postResponse->json()['data']['data']['current_page'] ?? 1;
+        $totalPages = $postResponse->json()['data']['data']['last_page'] ?? 1;
+        $totalPosts = $postResponse->json()['data']['data']['total'] ?? 0;
 
 
         return view('post.index', compact('posts', 'paginationLinks', 'currentPage', 'totalPages', 'totalPosts'));
