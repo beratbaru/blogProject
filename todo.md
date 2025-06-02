@@ -47,12 +47,6 @@ Frontend logoutunda mesela backende göre işlem yapsan daha iyi olabilir eğer 
 
 Frontendde helper ile fonksiyon yazmışsın bunu bazı yerlerde kullanmışsın bazı yerlerde kullanmamışsın eğer ki fark yoksa heryerde kullanmak daha mantıklı değilmi? [apirequest]
 
-PostControllerde categoryleri tagları çekmişsin ve buna ihtiyacı olan her sayfada bunu yapmak zorunda kalacaksın onun yerine provider ile yaparmısın? -->
+PostControllerde categoryleri tagları çekmişsin ve buna ihtiyacı olan her sayfada bunu yapmak zorunda kalacaksın onun yerine provider ile yaparmısın? 
 
-bende frontendde ve backendde bir işlem yaptığımda bir tarafta çıkış oluyordu. yani mesela backendde paneldeyim giriş yapmışım frontendde biryere girince işlem yapınca backend çıkış yapıyor. bu hatayı araştırabilirmisin? - 
--- panel ve depolanan tokene sahip kullanıcı browserda aynı sessionu kullandığı için birinden giriş yapınca diğerinden atıyor.
-
-localhost:8003/post (login yapıldıktan sonraki sessionu): eyJpdiI6IndkaDl1aitLcHRuaExlZDVaRjhpK1E9PSIsInZhbHVlIjoiaUdUaFcvdjlOWm9yY3doUXc3MnpGS0ZZclZjY2pMVkE2dGxuLzdqVkJmQ2xQQ0x1MmhPd3NvTnFDTnUwTG1pd2NuZ2NNUWVHalVsMHVJeEp6N3lidk5mZXVoaU5GWTk5enJmeTNEcVQ2YzlRZDc3aC80c1A5VWZwcitUcXhxNFkiLCJtYWMiOiJkZDBiYmU4YzE4NDI1NWYyZDcyNDY1ZWVhOGZjZDlhYTVjZGEwOWVmODc4YzhjZTQwMzM3NTBhOTAzZjMzZjU1IiwidGFnIjoiIn0%3D
-
-localhost:8000/panel (login yapıldıktan sonraki sessionu):
-eyJpdiI6InFRWk9oY1hyZmVqbmZjSGtVQ3Z3REE9PSIsInZhbHVlIjoiWW1YQmdVaDlQWTE0ZnZFSmFGd3BlcFdyWnpVTmpjdUFHSm01Y2ZiYzFYT1hFZlBSWS93WlZKOXpIbFRGNlNRdWQ4VEExKzZZSEpoaG9PdnY2cTRmNWtpL08yR3NJRTlTNGlDeXI0L1hkbXVWeGVGVndrakVuUHJ3a2pkem1aR3EiLCJtYWMiOiJlM2U2OGJmNGJiMjgzZGQ4MTJjMzZkZWM0ZjE5OGY4YjBlMzk1NzU5M2VlZGYzMzQzMTgzZmZhYTY1OWI3ODNkIiwidGFnIjoiIn0%3D
+bende frontendde ve backendde bir işlem yaptığımda bir tarafta çıkış oluyordu. yani mesela backendde paneldeyim giriş yapmışım frontendde biryere girince işlem yapınca backend çıkış yapıyor. bu hatayı araştırabilirmisin? -->
