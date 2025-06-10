@@ -12,9 +12,7 @@ class PostController extends Controller
     {
         $queryParams = $request->only(['category_id', 'tag', 'page']);
 
-        $postResponse = Http::withHeaders([
-            'Authorization' => session('api_token')
-        ])->get(env('API_URL') . '/api/posts', $queryParams);
+        $postResponse = ApiRequest::request('get', '/api/posts', $queryParams);
         
         
 

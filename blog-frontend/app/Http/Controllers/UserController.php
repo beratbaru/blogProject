@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function logout()
     {
-        $response = Http::withToken(session('api_token'))->post(config('services.api.url').'/api/logout');
+        $response = ApiRequest::request('post', '/api/logout');
         
         if ($response->successful()) {
             session()->forget(['api_token', 'user_name', 'user']);
