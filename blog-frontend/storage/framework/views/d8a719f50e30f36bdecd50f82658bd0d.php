@@ -25,13 +25,13 @@
                 <div class="hidden md:flex items-center space-x-6">
                     <a href="<?php echo e(url('profile')); ?>" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
                         <i class="fas fa-user-circle text-xl mr-2"></i>
-                        Profil
+                        Profile
                     </a>
                     <form action="<?php echo e(route('logout')); ?>" method="POST">
                         <?php echo csrf_field(); ?>
                         <button type="submit" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors">
                             <i class="fas fa-sign-out-alt text-xl mr-2"></i>
-                            Çıkış Yap
+                            Log out
                         </button>
                     </form>
                 </div>
@@ -61,7 +61,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex space-x-4">
             <form method="GET" class="flex space-x-4">
                 <select name="category_id" onchange="this.form.submit()" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-amber-500 focus:border-transparent">
-                    <option value="">Tümü</option>
+                    <option value="">Categories</option>
                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($category['id']); ?>" <?php echo e(request('category_id') == $category['id'] ? 'selected' : ''); ?>>
                             <?php echo e($category['name']); ?>
@@ -71,7 +71,7 @@
                 </select>
 
                 <select name="tag" onchange="this.form.submit()" class="px-4 py-2 rounded-lg text-sm font-medium bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-amber-500 focus:border-transparent">
-                    <option value="">Tüm Etiketler</option>
+                    <option value="">Tags</option>
                     <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($tag['name']); ?>" <?php echo e(request('tag') == $tag['name'] ? 'selected' : ''); ?>>
                             <?php echo e($tag['name']); ?>
@@ -80,7 +80,7 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
                 <a href="<?php echo e(route('post.index')); ?>" class="px-4 py-2 bg-red-500 text-white rounded-lg text-sm font-medium hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
-                    Temizle
+                    Clear
                 </a>
             </form>
         </div>
@@ -120,7 +120,7 @@
             <div class="col-span-full text-center py-12">
                 <div class="text-gray-500 dark:text-gray-400 text-xl mb-4">
                     <i class="fas fa-file-alt text-4xl mb-4"></i>
-                    <p>Yazı bulunamadı. Hemen bir tane oluştur!</p>
+                    <p>Empty.</p>
                 </div>
             </div>
             <?php endif; ?>
